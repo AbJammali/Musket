@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desired Layout</title>
+    <title>Navigation Menu with Sub-options</title>
     <style>
         body {
             padding: 5px;
             font-family: Montserrat, sans-serif;
         }
+
         .desktop-navigation {
             display: grid;
             grid-template-columns: 1fr 3fr; /* Left column for logo, right for content */
@@ -16,38 +17,41 @@
             gap: 1px;
             max-width: 1200px;
             margin: 0 auto;
-            /*border: 1px solid #000;*/
         }
+
         .Logo-section {
             display: flex;
             align-items: center;
             justify-content: center;
             grid-column: 1;
             grid-row: 1 / span 2;
-            /*border: 1px solid #000;p*/
         }
+
         .logo img {
             max-height: 100px;
             margin-right: 10px;
         }
+
         .language-donate-section {
-            grid-column: 2; /* Ensure it's in the right column */
-            grid-row: 1; /* Top right */
-            /*border: 1px solid #000;*/
+            grid-column: 2;
+            grid-row: 1;
             display: flex;
-            justify-content: flex-end; /* Aligns content to the right */
-            align-items: center; /* Vertically aligns content */
+            justify-content: flex-end;
+            align-items: center;
             padding: 10px;
         }
+
         .language-section {
             display: flex;
             align-items: center;
-            gap: 10px; /* Adds spacing between elements */
+            gap: 10px;
         }
+
         .languages {
             display: flex;
-            gap: 5px; /* Adds spacing between language links */
+            gap: 5px;
         }
+
         .languages a {
             text-decoration: none;
             color: #2d2d2d;
@@ -55,10 +59,12 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+
         .languages a:hover {
             text-decoration: underline;
         }
-        .donate-button {
+
+.donate-button {
             border-radius: 4px;
             color: #fff; /* Text color for readability */
             font-size: 19px;
@@ -74,15 +80,16 @@
             cursor: pointer; /* Changes cursor on hover */
             transition: background-color 0.3s ease; /* Smooth transition on hover */
         }
+
         .donate-button:hover {
-            opacity: 0.9; /* Slight transparency effect on hover */
+            opacity: 0.9;
         }
 
         .menu-section {
-            grid-column: 2; /* Right column */
-            grid-row: 2; /* Bottom right */
-           /* border: 1px solid #000;*/
+            grid-column: 2;
+            grid-row: 2;
         }
+
         .nav-links {
             list-style: none;
             display: flex;
@@ -90,27 +97,122 @@
             margin: 0;
             padding: 0;
         }
+
         .nav-links li {
             margin: 0 15px;
+            position: relative;
         }
+
         .nav-links a {
             text-decoration: none;
             color: #2d2d2d;
             font-size: 20px;
             font-weight: bold;
         }
+
         .nav-links a:hover {
             text-decoration: underline;
         }
+        
+        .columns-container {
+          display: flex;
+        }
+
+        .column {
+          flex: 1;
+          background-color: #f9f9f9;
+          padding: 10px;
+          min-height: 50px;
+          display: none;
+        }
+        
+        .sub-options-box {
+            margin-top: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+        }
+
+        .sub-options,
+        .mini-options {
+          list-style: none;
+          margin: 0;
+          padding: 0;
+        }
+
+        .sub-options li {
+            margin-bottom: 5px;
+            position: relative;
+        }
+
+        .sub-options li a {
+            text-decoration: none;
+            color: #333;
+        }
+
+        .sub-options li a:hover {
+            text-decoration: underline;
+        }
+        .mini-options li {
+          margin-bottom: 5px;
+          padding-left: 20px;
+        }
+
+        .mini-options li a {
+          text-decoration: none;
+          color: #555;
+        }
+
+        .mini-options li a:hover {
+          text-decoration: underline;
+        }
+
+        /* Styling for pictures in column 3 */
+        .image-column {
+          display: flex;
+          gap: 20px; /* Space between images */
+          justify-content: space-between; /* Ensures equal spacing */
+        }
+
+        .image-column .image-item {
+          flex: 1;
+          text-align: center;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .image-column .image-item img {
+          width: auto;
+          height: 200px; /* Ensure images are the same height */
+          max-width: 100%;
+          object-fit: cover; /* Ensures images cover the area without distorting */
+          border-radius: 8px;
+        }
+
+        .image-column .image-item .arrow {
+          display: block;
+          margin-top: 10px;
+          color: #333;
+          font-size: 16px;
+          text-decoration: none;
+          text-align: center; /* Center the text under the image */
+        }
+
+        .image-column .image-item .arrow:hover {
+          color: #00aaff;
+        }
+        
         @media (max-width: 768px) {
-            .navigation-bar {
-                grid-template-columns: 1fr; /* Single column layout */
+            .desktop-navigation {
+                grid-template-columns: 1fr;
                 grid-template-rows: auto auto auto;
             }
+
             .language-section {
                 flex-direction: column;
                 align-items: flex-start;
             }
+
             .languages, .donate-button {
                 margin-bottom: 10px;
             }
@@ -127,23 +229,294 @@
         <div class="language-donate-section">
             <div class="language-section">
                 <div class="languages">
-                    <a href="#">POLISH</a> | 
-                    <a href="#">ENGLISH</a> | 
-                    <a href="#">ARABIC</a> | 
-                    <a href="#">RUSSIAN</a>
+                    <a href="">POLISH</a> | 
+                    <a href="">ENGLISH</a> | 
+                    <a href="">ARABIC</a> | 
+                    <a href="">RUSSIAN</a>
                 </div>
                 <a href="#" class="donate-button">Donate</a>
             </div>
         </div>
         <div class="menu-section">
             <ul class="nav-links">
-                <li><a href="#">Visit the Center</a></li>
-                <li><a href="#">For Educators</a></li>
-                <li><a href="#">Support Our Center</a></li>
-                <li><a href="#">Events</a></li>
-                <li><a href="#">About Us</a></li>
+                <li data-target="visit-center">
+                    <a href="#">Visit the Center</a>
+                    <div class="columns-container" id="visit-center">
+                    <div class="column" id="column1">
+                    <ul class="sub-options" id="visit-center">
+                        <li>
+                            <a href="">Plan Your Visit</a>
+                            <ul class="mini-options">
+                              <li><a href="">Mini Option 1</a></li>
+                              <li><a href="">Mini Option 2</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Tickets</a>
+                        <ul class="mini-options">
+                              <li><a href="">Mini Option 1</a></li>
+                              <li><a href="">Mini Option 2</a></li>
+                            </ul>
+                        </li>
+                        </ul>
+                        </div>
+                         <div class="column" id="column2">
+                            <ul class="sub-options">
+                                <li>
+                                    <a href="">Guided Tours</a>
+                                <ul class="mini-options">
+                                      <li><a href="">Mini Option 1</a></li>
+                                      <li><a href="">Mini Option 2</a></li>
+                                    </ul>
+                                </li>
+                             </ul>
+                        </div>
+                          <div class="column" id="column3">
+                            <div class="image-column">
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/Centrum.jpg');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/Centrum.jpg" alt="Islamic Center">
+                                  <span class="arrow">Visit the Islamic Center</span>
+                                </a>
+                              </div>
+
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/visit.jpg');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/visit.jpg" alt="Book a Visit">
+                                  <span class="arrow">Book a Visit</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </li>
+                <li data-target="for-educators">
+                    <a href="#">For educators</a>
+                    <div class="columns-container" id="for-educators">
+                    <div class="column" id="column1">
+                    <ul class="sub-options" id="for-educators">
+                        <li>
+                            <a href="">Plan Your Visit</a>
+                            <ul class="mini-options">
+                              <li><a href="">Mini Option 1</a></li>
+                              <li><a href="">Mini Option 2</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Tickets</a>
+                        <ul class="mini-options">
+                              <li><a href="">Mini Option 1</a></li>
+                              <li><a href="">Mini Option 2</a></li>
+                            </ul>
+                        </li>
+                        </ul>
+                        </div>
+                         <div class="column" id="column2">
+                            <ul class="sub-options">
+                                <li>
+                                    <a href="">Guided Tours</a>
+                                <ul class="mini-options">
+                                      <li><a href="">Mini Option 1</a></li>
+                                      <li><a href="">Mini Option 2</a></li>
+                                    </ul>
+                                </li>
+                             </ul>
+                        </div>
+                          <div class="column" id="column3">
+                            <div class="image-column">
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/Educator.png');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/Educator.png" alt="Guide for Educators">
+                                  <span class="arrow">Museum Guide for Educators</span>
+                                </a>
+                              </div>
+
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/Teacher.png');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/Teacher.png" alt="On Demand Education">
+                                  <span class="arrow">On Demand Education</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </li>
+                <li data-target="Family">
+                    <a href="">Family</a>
+                    <div class="columns-container" id="Family">
+                    <div class="column" id="column1">
+                    <ul class="sub-options" id="Family">
+                        <a href="">Mariage</a>
+                        </ul>
+                        </div>
+                    <div class="column" id="column2">
+                        <ul class="sub-options">
+                            <a href="">Embracing Islam</a>
+                        </ul>
+                    </div>
+                          <div class="column" id="column3">
+                            <div class="image-column">
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/wedding.jpg');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/wedding.jpg" alt="Wedding">
+                                  <span class="arrow">Wedding</span>
+                                </a>
+                              </div>
+
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/guidance.jpg');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/guidance.jpg" alt="Guidance">
+                                  <span class="arrow">Guidance</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </li>
+                <li data-target="our-center">
+                    <a href="#">Support Our Center</a>
+                    <div class="columns-container" id="our-center">
+                    <div class="column" id="column1">
+                    <ul class="sub-options" id="our-center">
+                        <li>
+                            <a href="">Plan Your Visit</a>
+                            <ul class="mini-options">
+                              <li><a href="">Mini Option 1</a></li>
+                              <li><a href="">Mini Option 2</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Tickets</a>
+                        <ul class="mini-options">
+                              <li><a href="">Mini Option 1</a></li>
+                              <li><a href="">Mini Option 2</a></li>
+                            </ul>
+                        </li>
+                        </ul>
+                        </div>
+                         <div class="column" id="column2">
+                            <ul class="sub-options">
+
+                             </ul>
+                        </div>
+                          <div class="column" id="column3">
+                            <div class="image-column">
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/support.png');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/support.png" alt="Support Islam">
+                                  <span class="arrow">Support Islam</span>
+                                </a>
+                              </div>
+
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/Volunteer.png');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/Volunteer.png" alt="Volunteer">
+                                  <span class="arrow">Volunteer</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </li>
+                <li data-target="Events">
+                    <a href="">Events</a>
+                    <div class="columns-container" id="Events">
+                    <div class="column" id="column1">
+                    <ul class="sub-options" id="Events">
+                        </ul>
+                        </div>
+                         <div class="column" id="column2">
+                            <ul class="sub-options">
+                             </ul>
+                        </div>
+                          <div class="column" id="column3">
+                            <div class="image-column">
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/calendar.jpg');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/calendar.jpg" alt="Events Calendar">
+                                  <span class="arrow">Events Calendar</span>
+                                </a>
+                              </div>
+
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/archive.jpg');"></span>
+                                  <img src="https://github.com/AbJammali/Musket/blob/main/archive.jpg" alt="Archived">
+                                  <span class="arrow">Archived</span>
+                                </a>
+                              </div>
+                            </div>
+                          </div>
+                    </div>
+                </li>
             </ul>
         </div>
     </div>
+    <div class="sub-options-box" id="sub-options-container">
+        <!-- Sub-options will appear here dynamically -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainMenuItems = document.querySelectorAll('.nav-links li');
+            const subOptionsContainer = document.getElementById('sub-options-container');
+            const navigationMenu = document.querySelector('.menu-section');
+
+            let isMouseInside = false;
+
+      mainMenuItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          const targetId = item.getAttribute('data-target');
+          const columns = document.getElementById(targetId);
+          const columnsClone = columns.cloneNode(true);
+          
+          // Clear the previous content
+          subOptionsContainer.innerHTML = '';
+          
+          // Make each column visible in the box
+          columnsClone.style.display = 'flex';
+          columnsClone.querySelectorAll('.column').forEach(column => {
+            column.style.display = 'block';
+          });
+
+          subOptionsContainer.appendChild(columnsClone);
+        });
+      });
+
+      navigationMenu.addEventListener('mouseenter', () => {
+        isMouseInside = true;
+      });
+
+      navigationMenu.addEventListener('mouseleave', () => {
+        setTimeout(() => {
+          if (!isMouseInside) {
+            subOptionsContainer.innerHTML = '';
+          }
+        }, 100);
+      });
+
+      subOptionsContainer.addEventListener('mouseenter', () => {
+        isMouseInside = true;
+      });
+
+      subOptionsContainer.addEventListener('mouseleave', () => {
+        isMouseInside = false;
+        setTimeout(() => {
+          if (!isMouseInside) {
+            subOptionsContainer.innerHTML = '';
+          }
+        }, 100);
+      });
+    });
+  </script>
 </body>
 </html>
