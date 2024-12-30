@@ -332,6 +332,7 @@
         .mobile-navigation {
             display: block;
         }
+        
     }
     .phone-language-menu {
             position: fixed;
@@ -425,6 +426,49 @@
             .phone-language-menu {
                 display: block; /* Display menu on smaller screens */
             }
+        }
+    /*Donation button on phone */
+        .mobile-donate-sticky {
+            position: fixed;
+            top: 40%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            opacity: 1; /* Make the container visible */
+            transition: opacity 0.5s ease-in-out;
+            display: none; /* Hidden by default */
+        }
+
+        .mobile-donate-btn {
+            display: inline-block;
+            background-image:
+                radial-gradient(ellipse farthest-corner at right bottom, #0F8A8C 0%, #0F8A8C 8%, #0F8A8C 30%, #0F8A8C 40%, transparent 80%),
+                radial-gradient(ellipse farthest-corner at left top, #032E3B 8%, #032E3B 25%, #032E3B 62.5%, #0F8A8C 100%);
+            color: #fff;
+            font-size: 19px;
+            text-decoration: none;
+            background-size: cover;
+            background-repeat: no-repeat;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.6s ease;
+            padding: 22px 20px;
+            border-radius: 4px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: bold;
+            writing-mode: vertical-rl;
+            text-orientation: sideways;
+            rotate: 180deg;
+            transform: translateX(-70%); /* Start off-screen */
+            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+        }
+
+        .mobile-donate-btn:hover {
+            background-color: #e64a19;
+            transform: translateX(0); /* Slide to original position */
+            opacity: 1; /* Fade in */
         }
     /*Animation */
         .slider-section {
@@ -526,6 +570,14 @@
     @media (max-width: 500px) {
             .slider {
             width: 50%; /* Display menu on smaller screens */
+            }
+            .mobile-donate-sticky {
+                display: flex; /* Make the container visible on small screens */
+            }
+    }
+    @media (max-width: 950px) {
+        .mobile-donate-sticky {
+                display: flex; /* Make the container visible on small screens */
             }
         }
 </style>
@@ -649,8 +701,8 @@
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('./teacher.png');"></span>
-                                  <img src="./teacher.png" alt="On Demand Education">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./Teacher.png');"></span>
+                                  <img src="./Teacher.png" alt="On Demand Education">
                                   <span class="arrow">On Demand Education</span>
                                 </a>
                               </div>
@@ -680,7 +732,7 @@
                               <div class="image-item">
                                 <a href="">
                                   <span class="bg-image lazyloaded" style="background-image: url('./wedding.jpg');"></span>
-                                  <img src="./calendar.jpg" alt="Wedding">
+                                  <img src="./wedding.jpg" alt="Wedding">
                                   <span class="arrow">Wedding</span>
                                 </a>
                               </div>
@@ -766,7 +818,7 @@
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('./Volunteer.png');"></span>
+                                  <span class="bg-image lazyloaded" style="background-image: url('./archive.jpg');"></span>
                                   <img src="./archive.jpg" alt="Archived">
                                   <span class="arrow">Archived</span>
                                 </a>
@@ -811,6 +863,10 @@
             </ul>
         </div>
     </div>
+<!-- Sticky Donate Button -->
+<div class="mobile-donate-sticky">
+    <a href="#" class="mobile-donate-btn">Donate</a>
+</div>
 <!-- Phone Language Menu -->
     <div class="phone-language-menu">
         <!-- Menu icon -->
