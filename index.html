@@ -4,235 +4,543 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Navigation Menu with Sub-options</title>
-    <style>
+<style>
+    body {
+        padding: 5px;
+        font-family: Montserrat, sans-serif;
+        background-color: transparent; /* Default for mobile */
+    }
+
+    @media (min-width: 950px) {
         body {
-            padding: 5px;
-            font-family: Montserrat, sans-serif;
+            background-image: url(./picture2.png);
+            background-repeat: no-repeat;
+            background-size: cover;
         }
+    }
 
+    .desktop-navigation {
+        display: grid;
+        grid-template-columns: 1fr 3fr; /* Left column for logo, right for content */
+        grid-template-rows: 2fr 1fr; /* Right sections stacked */
+        gap: 1px;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .Logo-section {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        grid-column: 1;
+        grid-row: 1 / span 2;
+    }
+
+    .logo img {
+        max-height: 100px;
+        margin-right: 10px;
+    }
+
+    .language-donate-section {
+        grid-column: 2;
+        grid-row: 1;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .language-section {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .languages {
+        display: flex;
+        gap: 5px;
+    }
+
+    .languages a {
+        text-decoration: none;
+        color: #2d2d2d;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+    }
+
+    .languages a:hover {
+        text-decoration: underline;
+    }
+
+    .donate-button {
+        border-radius: 4px;
+        color: #fff; /* Text color for readability */
+        font-size: 19px;
+        font-family: 'Roboto Condensed', sans-serif;
+        padding: 10px 20px;
+        text-decoration: none;
+        background-image:
+            radial-gradient(ellipse farthest-corner at right bottom, #0F8A8C 0%, #0F8A8C 8%, #0F8A8C 30%, #0F8A8C 40%, transparent 80%),
+            radial-gradient(ellipse farthest-corner at left top, #032E3B 8%, #032E3B 25%, #032E3B 62.5%, #0F8A8C 100%);
+        background-size: cover; /* Ensures the gradient covers the button */
+        background-repeat: no-repeat; /* Avoids repeating the gradient */
+        border: none; /* Removes default border */
+        cursor: pointer; /* Changes cursor on hover */
+        transition: background-color 0.3s ease; /* Smooth transition on hover */
+    }
+
+    .donate-button:hover {
+        opacity: 0.9;
+    }
+
+    .menu-section {
+        grid-column: 2;
+        grid-row: 2;
+    }
+
+    .nav-links {
+        list-style: none;
+        display: flex;
+        justify-content: flex-end;
+        margin: 0;
+        padding: 0;
+    }
+
+    .nav-links li {
+        margin: 0 15px;
+        position: relative;
+    }
+
+    .nav-links a {
+        text-decoration: none;
+        color: #2d2d2d;
+        font-size: 20px;
+        font-weight: bold;
+    }
+
+    .nav-links a:hover {
+        text-decoration: underline;
+    }
+
+    .columns-container {
+        display: flex;
+    }
+
+    .column {
+        flex: 1;
+        background-color: #f9f9f9;
+        padding: 10px;
+        min-height: 50px;
+        display: none;
+    }
+
+    .sub-options-box {
+        margin-top: 10px;
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+    }
+
+    .sub-options {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    .mini-options {
+        list-style: none;
+        margin: 0;
+        padding: 6px;
+    }
+
+    .sub-options li {
+        margin-bottom: 5px;
+        position: relative;
+    }
+
+    .sub-options li a {
+        text-decoration: none;
+        color: #2d2d2d;
+        font-size: 17px;
+        font-weight: bold;
+    }
+
+    .sub-options li a:hover {
+        text-decoration: underline;
+    }
+
+    .mini-options li {
+        margin-bottom: 5px;
+        padding-left: 20px;
+        padding-top: 6px;
+    }
+
+    .mini-options li a {
+        text-decoration: none;
+        color: #555;
+    }
+
+    .mini-options li a:hover {
+        text-decoration: underline;
+    }
+
+    /* Styling for pictures in column 3 */
+    .image-column {
+        display: flex;
+        gap: 20px; /* Space between images */
+        justify-content: space-between; /* Ensures equal spacing */
+    }
+
+    .image-column .image-item {
+        flex: 1;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .image-column .image-item img {
+        width: auto;
+        height: 200px; /* Ensure images are the same height */
+        max-width: 100%;
+        object-fit: cover; /* Ensures images cover the area without distorting */
+        border-radius: 8px;
+    }
+
+    .image-column .image-item .arrow {
+        display: block;
+        margin-top: 10px;
+        color: #333;
+        font-size: 16px;
+        text-decoration: none;
+        text-align: center; /* Center the text under the image */
+    }
+
+    .image-column .image-item .arrow:hover {
+        color: #00aaff;
+    }
+
+    @media (max-width: 768px) {
         .desktop-navigation {
-            display: grid;
-            grid-template-columns: 1fr 3fr; /* Left column for logo, right for content */
-            grid-template-rows: 2fr 1fr; /* Right sections stacked */
-            gap: 1px;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .Logo-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            grid-column: 1;
-            grid-row: 1 / span 2;
-        }
-
-        .logo img {
-            max-height: 100px;
-            margin-right: 10px;
-        }
-
-        .language-donate-section {
-            grid-column: 2;
-            grid-row: 1;
-            display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            padding: 10px;
+            grid-template-columns: 1fr;
+            grid-template-rows: auto auto auto;
         }
 
         .language-section {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .languages, .donate-button {
+            margin-bottom: 10px;
+        }
+    }
+
+    /* Mobile Navigation */
+    .mobile-navigation {
+        display: none; /* Hidden by default; shown on smaller screens */
+    }
+
+    .mobile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+        background-color: #fff;
+        border-bottom: 1px solid #ccc;
+    }
+
+    .mobile-logo img {
+        max-height: 50px;
+    }
+
+    .hamburger-menu {
+        font-size: 24px;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .mobile-menu {
+        display: none;
+        flex-direction: column;
+        background-color: #f9f9f9;
+        position: absolute;
+        right: 13px;
+        left: 13px;
+        z-index: 100;
+        border-top: 1px solid #ccc;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .mobile-menu li {
+        border-bottom: 1px solid #ccc;
+    }
+
+    .mobile-menu a {
+        text-decoration: none;
+        color: #333;
+        display: block;
+        padding: 15px;
+        font-size: 18px;
+    }
+
+    .mobile-menu a:hover {
+        background-color: #e0e0e0;
+    }
+
+    .mobile-menu .mobile-sub-options {
+        display: none;
+        padding-left: 20px;
+        background-color: #f7f7f7;
+    }
+
+    .mobile-menu .mobile-sub-options a {
+        padding: 10px;
+        font-size: 16px;
+    }
+
+    .mobile-menu .mobile-mini-options {
+        display: none;
+        padding-left: 40px;
+        background-color: #f0f0f0;
+    }
+
+    .mobile-menu .mobile-mini-options a {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .mobile-menu .open > .mobile-sub-options {
+        display: block;
+    }
+
+    .mobile-menu .open .mobile-sub-options .open > .mobile-mini-options {
+        display: block;
+    }
+
+    @media (max-width: 950px) {
+        .desktop-navigation, .sub-options-box{
+            display: none;
+        }
+
+        .mobile-navigation {
+            display: block;
+        }
+    }
+    .phone-language-menu {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: none; /* Hidden by default for larger screens */
+        }
+
+        .menu-icon {
+            width: 50px;
+            height: 50px;
+            background-image:
+            radial-gradient(ellipse farthest-corner at right bottom, #0F8A8C 0%, #0F8A8C 8%, #0F8A8C 30%, #0F8A8C 40%, transparent 80%),
+            radial-gradient(ellipse farthest-corner at left top, #032E3B 8%, #032E3B 25%, #032E3B 62.5%, #0F8A8C 100%);
+            border-radius: 50%;
             display: flex;
+            justify-content: center;
             align-items: center;
+            cursor: pointer;
+        }
+
+        .menu-icon div {
+            width: 30px;
+            height: 4px;
+            background-color: goldenrod;
+            margin: 4px 0;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-options {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            display: none;
+            backdrop-filter: blur(10px); /* Adds blur effect */
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            background-color: gainsboro;
+        }
+
+        .menu-options.show {
+            display: block;
+        }
+
+        .menu-options > ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
             gap: 10px;
         }
 
-        .languages {
+        .menu-options > ul > li {
             display: flex;
-            gap: 5px;
-        }
-
-        .languages a {
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            color: black;
+            border-radius: 5px;
             text-decoration: none;
-            color: #2d2d2d;
-            font-weight: 400;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            cursor: pointer;
         }
 
-        .languages a:hover {
-            text-decoration: underline;
+        .menu-options > ul > li .flag-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+            cursor: pointer; /* Make the flag image clickable */
         }
 
-.donate-button {
-            border-radius: 4px;
-            color: #fff; /* Text color for readability */
-            font-size: 19px;
-            font-family: 'Roboto Condensed', sans-serif;
-            padding: 10px 20px;
-            text-decoration: none;
-            background-image: 
-                radial-gradient(ellipse farthest-corner at right bottom, #0F8A8C 0%, #0F8A8C 8%, #0F8A8C 30%, #0F8A8C 40%, transparent 80%),
-                radial-gradient(ellipse farthest-corner at left top, #032E3B 8%, #032E3B 25%, #032E3B 62.5%, #0F8A8C 100%);
-            background-size: cover; /* Ensures the gradient covers the button */
-            background-repeat: no-repeat; /* Avoids repeating the gradient */
-            border: none; /* Removes default border */
-            cursor: pointer; /* Changes cursor on hover */
-            transition: background-color 0.3s ease; /* Smooth transition on hover */
+        /* For the icon animation when clicked */
+        .menu-icon.open div:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
         }
 
-        .donate-button:hover {
-            opacity: 0.9;
+        .menu-icon.open div:nth-child(2) {
+            opacity: 0;
         }
 
-        .menu-section {
-            grid-column: 2;
-            grid-row: 2;
+        .menu-icon.open div:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
         }
 
-        .nav-links {
-            list-style: none;
+        /* Show the menu only in phone mode */
+        @media (max-width: 950px) {
+            .phone-language-menu {
+                display: block; /* Display menu on smaller screens */
+            }
+        }
+    /*Animation */
+        .slider-section {
             display: flex;
-            justify-content: flex-end;
-            margin: 0;
-            padding: 0;
+            align-items: center;
+
         }
 
-        .nav-links li {
-            margin: 0 15px;
+        .slider {
+            width: 80%;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            min-width: 100%;
             position: relative;
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #2d2d2d;
-            font-size: 20px;
-            font-weight: bold;
+        .slide img {
+            width: 100%;
+            display: block;
         }
 
-        .nav-links a:hover {
-            text-decoration: underline;
-        }
-        
-        .columns-container {
-          display: flex;
-        }
-
-        .column {
-          flex: 1;
-          background-color: #f9f9f9;
-          padding: 10px;
-          min-height: 50px;
-          display: none;
-        }
-        
-        .sub-options-box {
-            margin-top: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ccc;
+        .title {
+            position: absolute;
+            bottom: 60px; /* Adjusted the title position */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            padding: 5px 10px;
+            font-size: 18px;
+            border-radius: 5px;
         }
 
-        .sub-options,
-        .mini-options {
-          list-style: none;
-          margin: 0;
-          padding: 0;
+        .w-slider-nav {
+            text-align: center;
+            position: absolute;
+            bottom: 20px; /* Adjusted position of dots */
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
         }
 
-        .sub-options li {
-            margin-bottom: 5px;
-            position: relative;
+        .w-slider-dot {
+            width: 20px;
+            height: 20px;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 50%;
+            cursor: pointer;
+            display: inline-block;
+            text-align: center;
+            line-height: 20px;
+            color: white;
+            font-size: 12px;
+            transition: background-color 0.3s;
         }
 
-        .sub-options li a {
-            text-decoration: none;
-            color: #333;
+        .w-slider-dot.w-active {
+            background-color: #fff;
+            color: #000;
         }
 
-        .sub-options li a:hover {
-            text-decoration: underline;
-        }
-        .mini-options li {
-          margin-bottom: 5px;
-          padding-left: 20px;
-        }
-
-        .mini-options li a {
-          text-decoration: none;
-          color: #555;
-        }
-
-        .mini-options li a:hover {
-          text-decoration: underline;
+        button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 10;
+            border-radius: 50%;
         }
 
-        /* Styling for pictures in column 3 */
-        .image-column {
-          display: flex;
-          gap: 20px; /* Space between images */
-          justify-content: space-between; /* Ensures equal spacing */
+        .prev {
+            left: 10px;
         }
 
-        .image-column .image-item {
-          flex: 1;
-          text-align: center;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
+        .next {
+            right: 10px;
         }
-
-        .image-column .image-item img {
-          width: auto;
-          height: 200px; /* Ensure images are the same height */
-          max-width: 100%;
-          object-fit: cover; /* Ensures images cover the area without distorting */
-          border-radius: 8px;
-        }
-
-        .image-column .image-item .arrow {
-          display: block;
-          margin-top: 10px;
-          color: #333;
-          font-size: 16px;
-          text-decoration: none;
-          text-align: center; /* Center the text under the image */
-        }
-
-        .image-column .image-item .arrow:hover {
-          color: #00aaff;
-        }
-        
-        @media (max-width: 768px) {
-            .desktop-navigation {
-                grid-template-columns: 1fr;
-                grid-template-rows: auto auto auto;
-            }
-
-            .language-section {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .languages, .donate-button {
-                margin-bottom: 10px;
+    @media (max-width: 950px) {
+            .slider {
+            width: 30%; /* Display menu on smaller screens */
             }
         }
-    </style>
+</style>
+
 </head>
 <body>
+<!-- Desktop Navigation -->
     <div class="desktop-navigation">
         <div class="Logo-section">
             <div class="logo">
-                <img src="./icon.png"alt="OKM Logo">
+                <img src="./test.png" alt="OKM Logo">
             </div>
         </div>
         <div class="language-donate-section">
             <div class="language-section">
                 <div class="languages">
-                    <a href="">POLISH</a> | 
-                    <a href="">ENGLISH</a> | 
-                    <a href="">ARABIC</a> | 
-                    <a href="">RUSSIAN</a>
+                    <a href="#">POLISH</a> | 
+                    <a href="#">ENGLISH</a> | 
+                    <a href="#">ARABIC</a> | 
+                    <a href="#">RUSSIAN</a>
                 </div>
                 <a href="#" class="donate-button">Donate</a>
             </div>
@@ -275,16 +583,16 @@
                             <div class="image-column">
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/Centrum.jpg');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/Centrum.jpg" alt="Islamic Center">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./Centrum.jpg');"></span>
+                                  <img src="./Centrum.jpg" alt="Islamic Center">
                                   <span class="arrow">Visit the Islamic Center</span>
                                 </a>
                               </div>
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/visit.jpg');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/visit.jpg" alt="Book a Visit">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./visit.jpg');"></span>
+                                  <img src="./visit.jpg" alt="Book a Visit">
                                   <span class="arrow">Book a Visit</span>
                                 </a>
                               </div>
@@ -328,16 +636,16 @@
                             <div class="image-column">
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/Educator.png');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/Educator.png" alt="Guide for Educators">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./Educator.png');"></span>
+                                  <img src="./Educator.png" alt="Guide for Educators">
                                   <span class="arrow">Museum Guide for Educators</span>
                                 </a>
                               </div>
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/Teacher.png');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/Teacher.png" alt="On Demand Education">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./teacher.png');"></span>
+                                  <img src="./teacher.png" alt="On Demand Education">
                                   <span class="arrow">On Demand Education</span>
                                 </a>
                               </div>
@@ -350,28 +658,32 @@
                     <div class="columns-container" id="Family">
                     <div class="column" id="column1">
                     <ul class="sub-options" id="Family">
-                        <a href="">Mariage</a>
+                        <li>
+                            <a href="">Mariage</a>
+                        </li>
                         </ul>
                         </div>
                     <div class="column" id="column2">
                         <ul class="sub-options">
+                        <li>
                             <a href="">Embracing Islam</a>
+                            </li>
                         </ul>
                     </div>
                           <div class="column" id="column3">
                             <div class="image-column">
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/wedding.jpg');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/wedding.jpg" alt="Wedding">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./wedding.jpg');"></span>
+                                  <img src="./calendar.jpg" alt="Wedding">
                                   <span class="arrow">Wedding</span>
                                 </a>
                               </div>
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/guidance.jpg');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/guidance.jpg" alt="Guidance">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./guidance.jpg');"></span>
+                                  <img src="./guidance.jpg" alt="Guidance">
                                   <span class="arrow">Guidance</span>
                                 </a>
                               </div>
@@ -409,16 +721,16 @@
                             <div class="image-column">
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/support.png');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/support.png" alt="Support Islam">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./support.png');"></span>
+                                  <img src="./support.png" alt="Support Islam">
                                   <span class="arrow">Support Islam</span>
                                 </a>
                               </div>
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/Volunteer.png');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/Volunteer.png" alt="Volunteer">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./Volunteer.png');"></span>
+                                  <img src="./Volunteer.png" alt="Volunteer">
                                   <span class="arrow">Volunteer</span>
                                 </a>
                               </div>
@@ -441,16 +753,16 @@
                             <div class="image-column">
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/calendar.jpg');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/calendar.jpg" alt="Events Calendar">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./calendar.jpg');"></span>
+                                  <img src="./calendar.jpg" alt="Events Calendar">
                                   <span class="arrow">Events Calendar</span>
                                 </a>
                               </div>
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('https://github.com/AbJammali/Musket/blob/main/archive.jpg');"></span>
-                                  <img src="https://github.com/AbJammali/Musket/blob/main/archive.jpg" alt="Archived">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./Volunteer.png');"></span>
+                                  <img src="./archive.jpg" alt="Archived">
                                   <span class="arrow">Archived</span>
                                 </a>
                               </div>
@@ -464,7 +776,102 @@
     <div class="sub-options-box" id="sub-options-container">
         <!-- Sub-options will appear here dynamically -->
     </div>
+<!-- Mobile Navigation -->
+    <div class="mobile-navigation">
+        <div class="mobile-header">
+            <div class="mobile-logo">
+                <img src="./test.png" alt="OKM Logo">
+            </div>
+            <div class="hamburger-menu" id="hamburger-menu">
+                ☰
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobile-menu">
+            <ul>
+                <li><a href="">Visit the Center</a>
+                    <ul class="mobile-sub-options">
+                        <li>
+                            <a href="">Sub Option 1</a>
+                                <ul class="mobile-mini-options">
+                                    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li>
+                                </ul>
+                            </li>
+                    </ul>
+                </li>
+                <li><a href="">For Educators</a></li>
+                <li><a href="">Family</a></li>
+                <li><a href="">Support Our Center</a></li>
+                <li><a href="">Events</a></li>
+            </ul>
+        </div>
+    </div>
+<!-- Phone Language Menu -->
+    <div class="phone-language-menu">
+        <!-- Menu icon -->
+        <div class="menu-icon" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
 
+        <!-- Language selection options -->
+        <div class="menu-options" id="menuOptions">
+            <ul>
+                <li>
+                    <a href="./header-pl.html">
+                        <div class="flag-circle" style="background-image: url('./flags/pl.png');"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="./header-en.html">
+                        <div class="flag-circle" style="background-image: url('./flags/en.png');"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="./header-ar.html">
+                        <div class="flag-circle" style="background-image: url('./flags/ar.png');"></div>
+                    </a>
+                </li>
+                <li>
+                    <a href="./header-rs.html">
+                        <div class="flag-circle" style="background-image: url('./flags/rs.png');"></div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+<!--Animation with 3 pictures -->
+    <div class="slider-section">
+        <div class="slider">
+            <div class="slides">
+                <!-- Slide 1 -->
+                <div class="slide">
+                    <img src="./Educator.png" alt="Image 1">
+                    <div class="title">Title 1</div>
+                </div>
+                <!-- Slide 2 -->
+                <div class="slide">
+                    <img src="./Teacher.png" alt="Image 2">
+                    <div class="title">Title 2</div>
+                </div>
+                <!-- Slide 3 -->
+                <div class="slide">
+                    <img src="./Volunteer.png" alt="Image 3">
+                    <div class="title">Title 3</div>
+                </div>
+            </div>
+            <!-- Navigation -->
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+            <div class="w-slider-nav">
+        <div class="w-slider-dot w-active" onclick="moveToSlide(0)" aria-label="Show slide 1 of 3" role="button" tabindex="0">1</div>
+        <div class="w-slider-dot" onclick="moveToSlide(1)" aria-label="Show slide 2 of 3" role="button" tabindex="-1">2</div>
+        <div class="w-slider-dot" onclick="moveToSlide(2)" aria-label="Show slide 3 of 3" role="button" tabindex="-1">3</div>
+    </div>
+        </div>
+    </div>
+    
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const mainMenuItems = document.querySelectorAll('.nav-links li');
@@ -517,6 +924,73 @@
         }, 100);
       });
     });
+        // Function to toggle the mobile menu visibility
+        function toggleMobileMenu() {
+            const menu = document.getElementById("mobile-menu");
+            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
+        }
+
+        // Add event listener for hamburger menu to toggle mobile menu
+        document.getElementById("hamburger-menu").addEventListener("click", toggleMobileMenu);
+
+        // Add click event to handle sub-menu toggling
+        document.querySelectorAll(".mobile-menu li > a").forEach(link => {
+            link.addEventListener("click", function (e) {
+                const subMenu = this.nextElementSibling;
+                if (subMenu && (subMenu.classList.contains("mobile-sub-options") || subMenu.classList.contains("mobile-mini-options"))) {
+                    e.preventDefault(); // Prevent link navigation
+                    subMenu.parentNode.classList.toggle("open"); // Toggle visibility of sub-options
+                }
+            });
+        });
+        // Function to toggle the mobile language visibility
+        function toggleMenu() {
+            const menuOptions = document.getElementById('menuOptions');
+            const menuIcon = document.querySelector('.menu-icon');
+            
+            // Toggle the visibility of the menu options
+            menuOptions.classList.toggle('show');
+            
+            // Toggle the animation of the menu icon
+            menuIcon.classList.toggle('open');
+        };
+        // Function for animation slider
+        let currentSlide = 0;
+        const slideInterval = 3000; // 3 seconds for auto-slide
+
+        function moveSlide(direction) {
+        const slides = document.querySelector('.slides');
+        const totalSlides = document.querySelectorAll('.slide').length;
+
+        currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        updateDots();
+        }
+
+        function moveToSlide(index) {
+        currentSlide = index;
+        const slides = document.querySelector('.slides');
+        slides.style.transform = `translateX(-${currentSlide * 100}%)`;
+        updateDots();
+        }
+
+        function updateDots() {
+        const dots = document.querySelectorAll('.w-slider-dot');
+        dots.forEach((dot, index) => {
+            dot.classList.remove('w-active');
+            if (index === currentSlide) {
+                dot.classList.add('w-active');
+                }   
+            });
+        }
+
+        // Initialize first dot as active
+        updateDots();
+
+        // Auto-slide functionality
+        setInterval(() => {
+            moveSlide(1); // Move to the next slide every 3 seconds
+        }, slideInterval);
   </script>
 </body>
 </html>
