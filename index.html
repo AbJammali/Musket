@@ -1052,6 +1052,19 @@
         setInterval(() => {
             moveSlide(1); // Move to the next slide every 3 seconds
         }, slideInterval);
+        
+        // Reset donation mobile button to initial position after 3 sec
+         const donateButton = document.querySelector('.mobile-donate-btn');
+
+            // Function to reset button to initial position
+            function resetButtonPosition() {
+                donateButton.style.transform = 'translateX(-70%)'; // Reset to initial position
+            }
+
+            // Add event listener for the hover effect
+            donateButton.addEventListener('mouseenter', () => {
+                setTimeout(resetButtonPosition, 3000); // Reset the button after 3 seconds
+            });
   </script>
 </body>
 </html>
