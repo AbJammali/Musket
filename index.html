@@ -518,9 +518,14 @@
         .next {
             right: 10px;
         }
-    @media (max-width: 950px) {
+    @media (min-width: 540px) {
             .slider {
             width: 30%; /* Display menu on smaller screens */
+            }
+        }
+    @media (max-width: 500px) {
+            .slider {
+            width: 50%; /* Display menu on smaller screens */
             }
         }
 </style>
