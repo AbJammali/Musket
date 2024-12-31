@@ -470,15 +470,6 @@
             transform: translateX(0); /* Slide to original position */
             opacity: 1; /* Fade in */
         }
-    
-    @keyframes shake {
-            0% { transform: rotate(0deg); }
-            25% { transform: rotate(5deg); }
-            50% { transform: rotate(0eg); }
-            75% { transform: rotate(-5deg); }
-            100% { transform: rotate(0deg); }
-        }
-    
     /*Animation */
         .slider-section {
             display: flex;
@@ -710,8 +701,8 @@
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('./Teacher.png');"></span>
-                                  <img src="./Teacher.png" alt="On Demand Education">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./teacher.png');"></span>
+                                  <img src="./teacher.png" alt="On Demand Education">
                                   <span class="arrow">On Demand Education</span>
                                 </a>
                               </div>
@@ -741,7 +732,7 @@
                               <div class="image-item">
                                 <a href="">
                                   <span class="bg-image lazyloaded" style="background-image: url('./wedding.jpg');"></span>
-                                  <img src="./wedding.jpg" alt="Wedding">
+                                  <img src="./calendar.jpg" alt="Wedding">
                                   <span class="arrow">Wedding</span>
                                 </a>
                               </div>
@@ -827,7 +818,7 @@
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('./archive.jpg');"></span>
+                                  <span class="bg-image lazyloaded" style="background-image: url('./Volunteer.png');"></span>
                                   <img src="./archive.jpg" alt="Archived">
                                   <span class="arrow">Archived</span>
                                 </a>
@@ -874,7 +865,7 @@
     </div>
 <!-- Sticky Donate Button -->
 <div class="mobile-donate-sticky">
-    <a class="mobile-donate-btn">Donate</a>
+    <a href="#" class="mobile-donate-btn">Donate</a>
 </div>
 <!-- Phone Language Menu -->
     <div class="phone-language-menu">
@@ -890,22 +881,22 @@
             <ul>
                 <li>
                     <a href="./header-pl.html">
-                        <div class="flag-circle" style="background-image: url('./pl.png');"></div>
+                        <div class="flag-circle" style="background-image: url('./flags/pl.png');"></div>
                     </a>
                 </li>
                 <li>
                     <a href="./header-en.html">
-                        <div class="flag-circle" style="background-image: url('./en.png');"></div>
+                        <div class="flag-circle" style="background-image: url('./flags/en.png');"></div>
                     </a>
                 </li>
                 <li>
                     <a href="./header-ar.html">
-                        <div class="flag-circle" style="background-image: url('./ar.png');"></div>
+                        <div class="flag-circle" style="background-image: url('./flags/ar.png');"></div>
                     </a>
                 </li>
                 <li>
                     <a href="./header-rs.html">
-                        <div class="flag-circle" style="background-image: url('./rs.png');"></div>
+                        <div class="flag-circle" style="background-image: url('./flags/rs.png');"></div>
                     </a>
                 </li>
             </ul>
@@ -1061,62 +1052,18 @@
         setInterval(() => {
             moveSlide(1); // Move to the next slide every 3 seconds
         }, slideInterval);
-        
-// Select the donate button
-const donateButton = document.querySelector('.mobile-donate-btn');
+        // Reset donation mobile button to initial position after 3 sec
+         const donateButton = document.querySelector('.mobile-donate-btn');
 
-// Function to perform shake animation on page load
-function shakeButton() {
-    donateButton.style.transform = 'translateX(0)'; // Move to the start position
+            // Function to reset button to initial position
+            function resetButtonPosition() {
+                donateButton.style.transform = 'translateX(-70%)'; // Reset to initial position
+            }
 
-    // Apply shake animation
-    donateButton.style.animation = 'shake 0.3s ease-in-out 2';
-
-    // After the shake animation completes, reset the button to its initial position
-    setTimeout(() => {
-        donateButton.style.transform = 'translateX(-70%)'; // Back to initial position
-        donateButton.style.animation = ''; // Clear the animation property
-    }, 1000); // Shake duration (0.5s) * 2 repeats
-}
-
-// Function to reset button to initial position and remove the href
-function resetButtonPosition() {
-    donateButton.style.transform = 'translateX(-70%)'; // Reset to initial position
-    setTimeout(() => {
-        donateButton.removeAttribute('href'); // Remove the href after resetting
-        resetHoverEvent(); // Re-enable the mouseenter event
-    }, 300); // Delay to match the reset animation
-}
-
-// Function to handle hover effect
-function handleHover() {
-    donateButton.style.transform = 'translateX(0)'; // Move the button to visible position
-
-    // Assign the href after 0.5 seconds
-    setTimeout(() => {
-        donateButton.setAttribute('href', 'https://example.com'); // Assign the href
-    }, 500);
-
-    // Reset the button position after 3 seconds
-    setTimeout(resetButtonPosition, 3000);
-
-    // Temporarily disable the hover event to prevent re-triggering
-    donateButton.removeEventListener('mouseenter', handleHover);
-}
-
-// Function to re-enable the mouseenter event
-function resetHoverEvent() {
-    donateButton.addEventListener('mouseenter', handleHover);
-}
-
-// Initialize the mouseenter event
-resetHoverEvent();
-
-// Trigger the shake animation on page load and repeat it every minute
-window.addEventListener('load', () => {
-    setTimeout(shakeButton, 2000); // Initial shake after 2 seconds
-    setInterval(shakeButton, 60000); // Repeat shake every 60 seconds
-});
+            // Add event listener for the hover effect
+            donateButton.addEventListener('mouseenter', () => {
+                setTimeout(resetButtonPosition, 3000); // Reset the button after 3 seconds
+            });
   </script>
 </body>
 </html>
