@@ -470,6 +470,15 @@
             transform: translateX(0); /* Slide to original position */
             opacity: 1; /* Fade in */
         }
+    
+    @keyframes shake {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(5deg); }
+            50% { transform: rotate(0eg); }
+            75% { transform: rotate(-5deg); }
+            100% { transform: rotate(0deg); }
+        }
+    
     /*Animation */
         .slider-section {
             display: flex;
@@ -880,22 +889,22 @@
         <div class="menu-options" id="menuOptions">
             <ul>
                 <li>
-                    <a href="">
+                    <a href="./header-pl.html">
                         <div class="flag-circle" style="background-image: url('./pl.png');"></div>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="./header-en.html">
                         <div class="flag-circle" style="background-image: url('./en.png');"></div>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="./header-ar.html">
                         <div class="flag-circle" style="background-image: url('./ar.png');"></div>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="./header-rs.html">
                         <div class="flag-circle" style="background-image: url('./rs.png');"></div>
                     </a>
                 </li>
@@ -1053,19 +1062,34 @@
             moveSlide(1); // Move to the next slide every 3 seconds
         }, slideInterval);
         
-// Reset donation mobile button to initial position after 3 sec
+// Select the donate button
 const donateButton = document.querySelector('.mobile-donate-btn');
+
+// Function to perform shake animation on page load
+function shakeButton() {
+    donateButton.style.transform = 'translateX(0)'; // Move to the start position
+
+    // Apply shake animation
+    donateButton.style.animation = 'shake 0.3s ease-in-out 2';
+
+    // After the shake animation completes, reset the button to its initial position
+    setTimeout(() => {
+        donateButton.style.transform = 'translateX(-70%)'; // Back to initial position
+        donateButton.style.animation = ''; // Clear the animation property
+    }, 1000); // Shake duration (0.5s) * 2 repeats
+}
 
 // Function to reset button to initial position and remove the href
 function resetButtonPosition() {
     donateButton.style.transform = 'translateX(-70%)'; // Reset to initial position
     setTimeout(() => {
         donateButton.removeAttribute('href'); // Remove the href after resetting
+        resetHoverEvent(); // Re-enable the mouseenter event
     }, 300); // Delay to match the reset animation
 }
 
-// Add event listener for the hover effect
-donateButton.addEventListener('mouseenter', () => {
+// Function to handle hover effect
+function handleHover() {
     donateButton.style.transform = 'translateX(0)'; // Move the button to visible position
 
     // Assign the href after 0.5 seconds
@@ -1075,8 +1099,24 @@ donateButton.addEventListener('mouseenter', () => {
 
     // Reset the button position after 3 seconds
     setTimeout(resetButtonPosition, 3000);
-});
 
+    // Temporarily disable the hover event to prevent re-triggering
+    donateButton.removeEventListener('mouseenter', handleHover);
+}
+
+// Function to re-enable the mouseenter event
+function resetHoverEvent() {
+    donateButton.addEventListener('mouseenter', handleHover);
+}
+
+// Initialize the mouseenter event
+resetHoverEvent();
+
+// Trigger the shake animation on page load and repeat it every minute
+window.addEventListener('load', () => {
+    setTimeout(shakeButton, 2000); // Initial shake after 2 seconds
+    setInterval(shakeButton, 60000); // Repeat shake every 60 seconds
+});
   </script>
 </body>
 </html>
