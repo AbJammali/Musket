@@ -1053,33 +1053,29 @@
             moveSlide(1); // Move to the next slide every 3 seconds
         }, slideInterval);
 // Reset donation mobile button to initial position after 3 sec
-    const donateButton = document.querySelector('.mobile-donate-btn');
+const donateButton = document.querySelector('.mobile-donate-btn');
 
-    // Function to reset button to initial position and remove the href
-    function resetButtonPosition() {
-        donateButton.style.transform = 'translateX(-70%)'; // Reset to initial position
-        setTimeout(() => {
-            donateButton.removeAttribute('href'); // Remove the href after resetting
-        }, 300); // Delay to match the reset animation
-    }
+// Function to reset button to initial position and remove the href
+function resetButtonPosition() {
+    donateButton.style.transform = 'translateX(-70%)'; // Reset to initial position
+    setTimeout(() => {
+        donateButton.removeAttribute('href'); // Remove the href after resetting
+    }, 300); // Delay to match the reset animation
+}
 
-    // Function to show the button and add the href
-    function showButton() {
-        donateButton.style.transform = 'translateX(0)'; // Move the button to visible position
-        setTimeout(() => {
-            donateButton.setAttribute('href', 'https://example.com'); // Assign the href
-        }, 500);
+// Add event listener for the hover effect
+donateButton.addEventListener('mouseenter', () => {
+    donateButton.style.transform = 'translateX(0)'; // Move the button to visible position
 
-        // Reset the button position after 3 seconds
-        setTimeout(resetButtonPosition, 3000);
-    }
+    // Assign the href after 0.5 seconds
+    setTimeout(() => {
+        donateButton.setAttribute('href', 'https://example.com'); // Assign the href
+    }, 500);
 
-    // Add event listeners for both mouse and touch events
-    donateButton.addEventListener('mouseenter', showButton); // For mouse hover
-    donateButton.addEventListener('touchstart', (event) => {
-        event.preventDefault(); // Prevent unintended behavior
-        showButton(); // Trigger the same behavior as hover
-    });
+    // Reset the button position after 3 seconds
+    setTimeout(resetButtonPosition, 3000);
+});
+
   </script>
 </body>
 </html>
