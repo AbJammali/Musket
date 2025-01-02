@@ -557,6 +557,34 @@
         .next {
             right: 10px;
         }
+    .image-container {
+      position: relative;
+      /*width: 80%; /* You can adjust the box size here */
+      height: 40vh; /* Adjust height as needed */
+      margin: 0 auto; /* Center the box horizontally */
+      overflow: hidden; /* Hide anything overflowing from the box */
+      border: 2px solid #ccc; /* Optional border for visual effect */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: url(./text2.jpeg);
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+
+    .centered-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-family: "Poppins", Sans-serif;
+      font-size: 59px;
+      line-height: 1.2em;
+      font-weight: bold;
+      text-align: center;
+    }
     @media (min-width: 540px) {
             .slider {
             width: 30%; /* Display menu on smaller screens */
@@ -574,7 +602,25 @@
         .mobile-donate-sticky {
                 display: flex; /* Make the container visible on small screens */
             }
-        }
+    }
+    /* For screens between 0px and 400px */
+@media screen and (max-width: 431px) {
+  .centered-text {
+    font-size: 24px;
+  }
+    .image-container{
+      height: 24vh;  
+    }
+}
+@media screen and (min-width: 432px) and (max-width: 950px) {
+  .centered-text {
+    font-size: 31px;
+  }
+    .image-container{
+      height: 35vh;  
+    }
+}
+
 </style>
 
 </head>
@@ -813,7 +859,7 @@
 
                               <div class="image-item">
                                 <a href="">
-                                  <span class="bg-image lazyloaded" style="background-image: url('./archive.jpg');"></span>
+                                  <span class="bg-image lazyloaded" style="background-image: url('./archive.png');"></span>
                                   <img src="./archive.jpg" alt="Archived">
                                   <span class="arrow">Archived</span>
                                 </a>
@@ -859,9 +905,7 @@
         </div>
     </div>
 <!-- Sticky Donate Button -->
-<div class="mobile-donate-sticky">
-    <a class="mobile-donate-btn">Donate</a>
-</div>
+
 <!-- Phone Language Menu -->
     <div class="phone-language-menu">
         <!-- Menu icon -->
@@ -875,58 +919,37 @@
         <div class="menu-options" id="menuOptions">
             <ul>
                 <li>
-                    <a href="">
-                        <div class="flag-circle" style="background-image: url('./pl.png');"></div>
+                    <a href="./header-pl.html">
+                        <div class="flag-circle" style="background-image: url('./flags/pl.png');"></div>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <div class="flag-circle" style="background-image: url('./en.png');"></div>
+                    <a href="./header-en.html">
+                        <div class="flag-circle" style="background-image: url('./flags/en.png');"></div>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <div class="flag-circle" style="background-image: url('./ar.png');"></div>
+                    <a href="./header-ar.html">
+                        <div class="flag-circle" style="background-image: url('./flags/ar.png');"></div>
                     </a>
                 </li>
                 <li>
-                    <a href="">
-                        <div class="flag-circle" style="background-image: url('./rs.png');"></div>
+                    <a href="./header-rs.html">
+                        <div class="flag-circle" style="background-image: url('./flags/rs.png');"></div>
                     </a>
                 </li>
             </ul>
         </div>
     </div>
-<!--Animation with 3 pictures -->
-    <div class="slider-section">
-        <div class="slider">
-            <div class="slides">
-                <!-- Slide 1 -->
-                <div class="slide">
-                    <img src="./Educator.png" alt="Image 1">
-                    <div class="title">Title 1</div>
-                </div>
-                <!-- Slide 2 -->
-                <div class="slide">
-                    <img src="./Teacher.png" alt="Image 2">
-                    <div class="title">Title 2</div>
-                </div>
-                <!-- Slide 3 -->
-                <div class="slide">
-                    <img src="./Volunteer.png" alt="Image 3">
-                    <div class="title">Title 3</div>
-                </div>
-            </div>
-            <!-- Navigation -->
-            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
-            <button class="next" onclick="moveSlide(1)">&#10095;</button>
-            <div class="w-slider-nav">
-        <div class="w-slider-dot w-active" onclick="moveToSlide(0)" aria-label="Show slide 1 of 3" role="button" tabindex="0">1</div>
-        <div class="w-slider-dot" onclick="moveToSlide(1)" aria-label="Show slide 2 of 3" role="button" tabindex="-1">2</div>
-        <div class="w-slider-dot" onclick="moveToSlide(2)" aria-label="Show slide 3 of 3" role="button" tabindex="-1">3</div>
-    </div>
-        </div>
-    </div>
+<!--Main image with inside text -->
+<div class="image-container">
+    <div class="centered-text" id="centered-text"></div>
+  </div>    
+
+<div class="mobile-donate-sticky">
+    <a class="mobile-donate-btn">Donate</a>
+</div>
+
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -1047,11 +1070,10 @@
         setInterval(() => {
             moveSlide(1); // Move to the next slide every 3 seconds
         }, slideInterval);
-        
-        // Reset donation mobile button to initial position after 3 sec
-         const donateButton = document.querySelector('.mobile-donate-btn');
+// Reset donation mobile button to initial position after 3 sec
+const donateButton = document.querySelector('.mobile-donate-btn');
 
-    // Define initial and start positions
+// Define initial and start positions
     const initialPosition = 'translateX(-70%)';
     const startPosition = 'translateX(0)';
     const hrefValue = "https://www.example.com/donate";
@@ -1061,7 +1083,7 @@
         donateButton.style.transform = startPosition; // Move to start position
         setTimeout(() => {
             assignHref(); // Assign href after 0.5 seconds
-        }, 100);
+        }, 500);
 
         setTimeout(() => {
             moveToInitialPosition(); // Reset to initial position after 3 seconds
@@ -1096,6 +1118,30 @@
 
     // Set the initial position when the page loads
     donateButton.style.transform = initialPosition;
+        
+    //Text animation for main picture
+function typeText(elementId, text, speed) {
+      const element = document.getElementById(elementId);
+      let index = 0;
+      const cursor = document.createElement('span');
+      cursor.classList.add('cursor');
+      element.appendChild(cursor);
+
+      function addNextCharacter() {
+        if (index < text.length) {
+          element.textContent += text[index];
+          index++;
+          setTimeout(addNextCharacter, speed);
+        }
+      }
+
+      addNextCharacter();
+    }
+
+    // Call the function to type out the text
+    const textToType = 'In The Name of Allah, The Most Beneficent, The Most Merciful.';
+    const typingSpeed = 100; // Adjust speed of typing (milliseconds per character)
+    typeText('centered-text', textToType, typingSpeed);    
   </script>
 </body>
 </html>
