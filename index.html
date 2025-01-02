@@ -435,9 +435,8 @@
             justify-content: flex-end;
             align-items: center;
             width: 100%;
-            opacity: 1; /* Make the container visible */
-            transition: opacity 0.5s ease-in-out;
-            display: none; /* Hidden by default */
+            visibility: visible;
+            opacity: 1;
         }
 
         .mobile-donate-btn {
@@ -465,11 +464,6 @@
             transition: transform 0.6s ease-out, opacity 0.6s ease-out;
         }
 
-        .mobile-donate-btn:hover {
-            background-color: #e64a19;
-            transform: translateX(0); /* Slide to original position */
-            opacity: 1; /* Fade in */
-        }
     /*Animation */
         .slider-section {
             display: flex;
@@ -1054,17 +1048,53 @@
         }, slideInterval);
         
         // Reset donation mobile button to initial position after 3 sec
-         const donateButton = document.querySelector('.mobile-donate-btn');
+         const donateButton = document.querySelector('.donate-btn');
 
-            // Function to reset button to initial position
-            function resetButtonPosition() {
-                donateButton.style.transform = 'translateX(-70%)'; // Reset to initial position
-            }
+    // Define initial and start positions
+    const initialPosition = 'translateX(-70%)';
+    const startPosition = 'translateX(0)';
+    const hrefValue = "https://www.example.com/donate";
 
-            // Add event listener for the hover effect
-            donateButton.addEventListener('mouseenter', () => {
-                setTimeout(resetButtonPosition, 3000); // Reset the button after 3 seconds
-            });
+    // Function to move to the start position
+    function moveToStartPosition() {
+        donateButton.style.transform = startPosition; // Move to start position
+        setTimeout(() => {
+            assignHref(); // Assign href after 0.5 seconds
+        }, 500);
+
+        setTimeout(() => {
+            moveToInitialPosition(); // Reset to initial position after 3 seconds
+        }, 3000);
+    }
+
+    // Function to reset to the initial position
+    function moveToInitialPosition() {
+        donateButton.style.transform = initialPosition;
+        removeHref(); // Remove href after returning to initial position
+    }
+
+    // Function to assign the href
+    function assignHref() {
+        donateButton.setAttribute('href', hrefValue);
+    }
+
+    // Function to remove the href
+    function removeHref() {
+        donateButton.removeAttribute('href');
+    }
+
+    // Add event listener for the click event
+    donateButton.addEventListener('click', (event) => {
+        // Check if the button has an href
+        if (!donateButton.hasAttribute('href')) {
+            event.preventDefault(); // Prevent navigation if href isn't set
+            moveToStartPosition(); // Trigger movement on click
+        }
+        // If href is set, allow the navigation
+    });
+
+    // Set the initial position when the page loads
+    donateButton.style.transform = initialPosition;
   </script>
 </body>
 </html>
