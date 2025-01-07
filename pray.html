@@ -1,157 +1,127 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Prayer Times & Countdown</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="./icon.png" type="image/x-icon">
-    <script src="https://unpkg.com/adhan@4.4.3/lib/bundles/adhan.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data-10-year-range.min.js"></script>
-    <style>
-       body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            padding: 20px;
-        }
-        #next-prayer {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        #countdown {
-            font-size: 1.5em;
-            color: #007bff;
-            margin-top: 10px;
-        }
-        #notification {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: #007bff;
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            display: none;
-            z-index: 1000;
-        }
-    </style>
+  <title>Audio Autoplay Policy</title>
+  <script>
+    function startAudioWithPolicy() {
+      const audioPlayer = document.getElementById('audio-player');
+      const policyNotification = document.getElementById('policy-notification');
+      const overlay = document.getElementById('overlay');  // Get overlay element
+
+      // Hide the notification and remove the overlay after clicking
+      policyNotification.style.display = 'none';
+      overlay.style.display = 'none';  // Hide the overlay
+
+      // Play the audio immediately after interaction
+      audioPlayer.play().then(() => {
+        showNotification("The audio is now playing!");
+      }).catch(error => {
+        showNotification("Audio couldn't play due to browser restrictions. Please check your browser settings.");
+        console.error(error);
+      });
+    }
+
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+    }
+  </script>
+  <style>
+    /* Notification styling */
+    #notification {
+      display: none;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #333;
+      border-radius: 5px;
+    }
+
+    /* Cookie-style notification container */
+    #policy-notification {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    /* Button inside the notification */
+    #policy-button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background-color: green;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #policy-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Smooth fade-in effect for notification */
+    #policy-notification {
+      animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Overlay to gray out the page */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* Darken the background */
+      z-index: 999;  /* Ensure it sits above content */
+    }
+
+    /* Ensure the rest of the content remains visible */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+  </style>
 </head>
 <body>
-    <h1>Prayer Times & Scheduled Audio Playback</h1>
-    <div id="prayer-times"></div>
-    <div id="next-prayer">
-        <h2>Next Prayer</h2>
-        <p id="next-prayer-name">Loading...</p>
-        <div id="countdown">--:--:--</div>
-    </div>
-    <div id="notification"></div>
+  <h1>Welcome!</h1>
+  <p>Audio playback will begin after you acknowledge the policy.</p>
 
-    <script>
-        const showNotification = (message) => {
-            const notification = document.getElementById("notification");
-            notification.textContent = message;
-            notification.style.display = "block";
+  <!-- Overlay to gray out the page until button is clicked -->
+  <div id="overlay"></div>
 
-            setTimeout(() => {
-                notification.style.display = "none";
-            }, 5000); // Hide notification after 5 seconds
-        };
+  <!-- Cookie-style policy notification -->
+  <div id="policy-notification">
+    <span>We need your consent to play audio on this page. Click "Allow Audio" to proceed.</span>
+    <button id="policy-button" onclick="startAudioWithPolicy()">Allow Audio</button>
+  </div>
+    
+  <!-- Notification element -->
+  <div id="notification"></div>
 
-        const playAudio = () => {
-            const audio = new Audio('path_to_your_audio_file.mp3'); // Replace with your audio file
-            audio.play();
-            showNotification("Prayer time! Audio is playing.");
-        };
-
-        const scheduleSongPlay = (prayerTimes) => {
-            const now = new Date();
-            for (const [prayer, time] of Object.entries(prayerTimes)) {
-                const prayerTime = new Date(time);
-                if (prayerTime > now) {
-                    const delay = prayerTime - now;
-                    console.log(`Scheduled ${prayer} audio playback in ${Math.round(delay / 1000)} seconds`);
-                    setTimeout(playAudio, delay);
-                }
-            }
-        };
-
-        const calculateNextPrayer = (prayerTimes) => {
-            const now = new Date();
-            for (const [prayer, time] of Object.entries(prayerTimes)) {
-                if (new Date(time) > now) {
-                    return { name: prayer, time: new Date(time) };
-                }
-            }
-            return null; // In case all prayers have passed for the day
-        };
-
-        const updateCountdown = (nextPrayerTime) => {
-            const now = new Date();
-            const diff = nextPrayerTime - now;
-            if (diff <= 0) {
-                document.getElementById('countdown').textContent = "Time for prayer!";
-                return;
-            }
-
-            const hours = Math.floor(diff / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-            document.getElementById('countdown').textContent = 
-                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
-        };
-
-        const startCountdown = (nextPrayer) => {
-            document.getElementById('next-prayer-name').textContent = `${nextPrayer.name} at ${moment(nextPrayer.time).format('h:mm A')}`;
-            updateCountdown(nextPrayer.time);
-            setInterval(() => updateCountdown(nextPrayer.time), 1000);
-        };
-
-        const calculatePrayerTimes = () => {
-            const coordinates = new adhan.Coordinates(52.2297, 21.0122); // Warsaw, Poland
-            const params = adhan.CalculationMethod.MuslimWorldLeague();
-            const now = new Date();
-
-            // Adjust for high latitude (if needed)
-            params.highLatitudeRule = adhan.HighLatitudeRule.MiddleOfTheNight;
-
-            // Calculate prayer times
-            const prayerTimes = new adhan.PrayerTimes(coordinates, now, params);
-
-            // Format and display times
-            const formattedTimes = {
-                Fajr: prayerTimes.fajr,
-                Sunrise: prayerTimes.sunrise,
-                Dhuhr: prayerTimes.dhuhr,
-                Asr: prayerTimes.asr,
-                Maghrib: prayerTimes.maghrib,
-                Isha: prayerTimes.isha,
-            };
-
-            const display = document.getElementById("prayer-times");
-            display.innerHTML = "<h2>Prayer Times for Warsaw, Poland</h2>";
-            for (const [prayer, time] of Object.entries(formattedTimes)) {
-                display.innerHTML += `<p>${prayer}: ${moment(time).tz('Europe/Warsaw').format('h:mm A')}</p>`;
-            }
-
-            // Schedule audio playback
-            scheduleSongPlay(formattedTimes);
-
-            // Determine next prayer and start countdown
-            const nextPrayer = calculateNextPrayer(formattedTimes);
-            if (nextPrayer) {
-                startCountdown(nextPrayer);
-            } else {
-                document.getElementById('next-prayer-name').textContent = "No more prayers for today.";
-                document.getElementById('countdown').textContent = "--:--:--";
-            }
-        };
-
-        // Initialize prayer times and countdown
-        calculatePrayerTimes();
-    </script>
+  <!-- Audio Element -->
+  <audio id="audio-player" src="./adan.mp3"></audio>
 </body>
 </html>
