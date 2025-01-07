@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prayer Times & Countdown</title>
+    <link rel="icon" href="./icon.png" type="image/x-icon">
+    <script src="https://unpkg.com/adhan@4.4.3/lib/bundles/adhan.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.28/moment-timezone-with-data-10-year-range.min.js"></script>
+    <style>
+       body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        #next-prayer {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        #countdown {
+            font-size: 1.5em;
+            color: #007bff;
+            margin-top: 10px;
+        }
+        #notification {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            display: none;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Prayer Times & Scheduled Audio Playback</h1>
+    <div id="prayer-times"></div>
+    <div id="next-prayer">
+        <h2>Next Prayer</h2>
+        <p id="next-prayer-name">Loading...</p>
+        <div id="countdown">--:--:--</div>
+    </div>
+    <div id="notification"></div>
+
+    <script>
+        const showNotification = (message) => {
+            const notification = document.getElementById("notification");
+            notification.textContent = message;
+            notification.style.display = "block";
+
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 5000); // Hide notification after 5 seconds
+        };
+
+        const playAudio = () => {
+            const audio = new Audio('path_to_your_audio_file.mp3'); // Replace with your audio file
+            audio.play();
+            showNotification("Prayer time! Audio is playing.");
+        };
+
+        const scheduleSongPlay = (prayerTimes) => {
+            const now = new Date();
+            for (const [prayer, time] of Object.entries(prayerTimes)) {
+                const prayerTime = new Date(time);
+                if (prayerTime > now) {
+                    const delay = prayerTime - now;
+                    console.log(`Scheduled ${prayer} audio playback in ${Math.round(delay / 1000)} seconds`);
+                    setTimeout(playAudio, delay);
+                }
+            }
+        };
+
+        const calculateNextPrayer = (prayerTimes) => {
+            const now = new Date();
+            for (const [prayer, time] of Object.entries(prayerTimes)) {
+                if (new Date(time) > now) {
+                    return { name: prayer, time: new Date(time) };
+                }
+            }
+            return null; // In case all prayers have passed for the day
+        };
+
+        const updateCountdown = (nextPrayerTime) => {
+            const now = new Date();
+            const diff = nextPrayerTime - now;
+            if (diff <= 0) {
+                document.getElementById('countdown').textContent = "Time for prayer!";
+                return;
+            }
+
+            const hours = Math.floor(diff / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById('countdown').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        };
+
+        const startCountdown = (nextPrayer) => {
+            document.getElementById('next-prayer-name').textContent = `${nextPrayer.name} at ${moment(nextPrayer.time).format('h:mm A')}`;
+            updateCountdown(nextPrayer.time);
+            setInterval(() => updateCountdown(nextPrayer.time), 1000);
+        };
+
+        const calculatePrayerTimes = () => {
+            const coordinates = new adhan.Coordinates(52.2297, 21.0122); // Warsaw, Poland
+            const params = adhan.CalculationMethod.MuslimWorldLeague();
+            const now = new Date();
+
+            // Adjust for high latitude (if needed)
+            params.highLatitudeRule = adhan.HighLatitudeRule.MiddleOfTheNight;
+
+            // Calculate prayer times
+            const prayerTimes = new adhan.PrayerTimes(coordinates, now, params);
+
+            // Format and display times
+            const formattedTimes = {
+                Fajr: prayerTimes.fajr,
+                Sunrise: prayerTimes.sunrise,
+                Dhuhr: prayerTimes.dhuhr,
+                Asr: prayerTimes.asr,
+                Maghrib: prayerTimes.maghrib,
+                Isha: prayerTimes.isha,
+            };
+
+            const display = document.getElementById("prayer-times");
+            display.innerHTML = "<h2>Prayer Times for Warsaw, Poland</h2>";
+            for (const [prayer, time] of Object.entries(formattedTimes)) {
+                display.innerHTML += `<p>${prayer}: ${moment(time).tz('Europe/Warsaw').format('h:mm A')}</p>`;
+            }
+
+            // Schedule audio playback
+            scheduleSongPlay(formattedTimes);
+
+            // Determine next prayer and start countdown
+            const nextPrayer = calculateNextPrayer(formattedTimes);
+            if (nextPrayer) {
+                startCountdown(nextPrayer);
+            } else {
+                document.getElementById('next-prayer-name').textContent = "No more prayers for today.";
+                document.getElementById('countdown').textContent = "--:--:--";
+            }
+        };
+
+        // Initialize prayer times and countdown
+        calculatePrayerTimes();
+    </script>
+</body>
+</html>
