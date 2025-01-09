@@ -439,6 +439,7 @@
             opacity: 1; /* Make the container visible */
             transition: opacity 0.5s ease-in-out;
             display: none; /* Hidden by default */
+            z-index:1;
         }
         .mobile-donate-letter {
                 font-size: 36px;
@@ -634,6 +635,9 @@
   }
     .image-container{
       height: 30vh;  
+    }
+    #prayer-cards-container {
+        flex-wrap: wrap;
     }
 }
 @media screen and (min-width: 432px) and (max-width: 950px) {
