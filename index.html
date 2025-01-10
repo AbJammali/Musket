@@ -1495,46 +1495,8 @@ typeTextSequence('centered-text', textList, typingSpeed, delayBetweenTexts);
           // Update the sub-header with both dates
           document.getElementById('date-container').textContent = `Today ${gregorianDate} | Hijri ${hijriDate}`;
 
-          const currentTime = new Date();
-          const prayerCardsContainer = document.getElementById('prayer-cards-container');
-          const orderedPrayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]; // Only main 5 prayers
-          const backgroundImages = {
-            Fajr: './fajr-pray.png', // Example background image for Fajr
-            Dhuhr: './dohr-pray.png',
-            Asr: './asr-pray.png',
-            Maghrib: './magreb-pray.png',
-            Isha: './isha-pray.jpg',
-          };
-
-          orderedPrayers.forEach(prayer => {
-            if (timings[prayer]) {
-              const prayerTime = new Date(`${currentTime.toDateString()} ${timings[prayer]}`);
-              const isUpcoming = prayerTime > currentTime;
-
-              const card = document.createElement('div');
-              card.classList.add('card');
-              if (isUpcoming && !document.querySelector('.highlight')) {
-                card.classList.add('highlight');
-                card.style.backgroundImage = `url('${backgroundImages[prayer]}')`;
-                card.innerHTML = `
-                  <div class="header">Upcoming Prayer</div>
-                  <div class="header">${prayer}</div>
-                  <div class="countdown" id="countdown-timer">${calculateCountdown(prayerTime)}</div>
-                  <div class="time">${timings[prayer]}</div>
-                `;
-                setInterval(() => {
-                  document.getElementById('countdown-timer').textContent = calculateCountdown(prayerTime);
-                }, 1000);
-              } else {
-                card.innerHTML = `
-                  <div class="header">${prayer}</div>
-                  <div class="time">${timings[prayer]}</div>
-                `;
-              }
-
-              prayerCardsContainer.appendChild(card);
-            }
-          });
+          // Render prayer cards and manage countdowns
+          renderPrayerCards(timings);
         } else {
           console.error('Error fetching data:', data);
         }
@@ -1543,18 +1505,77 @@ typeTextSequence('centered-text', textList, typingSpeed, delayBetweenTexts);
         console.error('Error:', error);
       });
 
-    function calculateCountdown(prayerTime) {
-      const now = new Date();
-      const diff = prayerTime - now;
+    let currentPrayerIndex = -1; // Tracks the current highlighted prayer
 
-      if (diff <= 0) return '00:00:00';
+    function renderPrayerCards(timings) {
+      const currentTime = new Date();
+      const prayerCardsContainer = document.getElementById('prayer-cards-container');
+      const orderedPrayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+      const backgroundImages = {
+        Fajr: './fajr-pray.png',
+        Dhuhr: './dohr-pray.png',
+        Asr: './asr-pray.png',
+        Maghrib: './magreb-pray.png',
+        Isha: './isha-pray.jpg',
+      };
 
-      const hours = String(Math.floor(diff / (1000 * 60 * 60))).padStart(2, '0');
-      const minutes = String(Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, '0');
-      const seconds = String(Math.floor((diff % (1000 * 60)) / 1000)).padStart(2, '0');
+      // Clear previous cards
+      prayerCardsContainer.innerHTML = '';
 
-      return `${hours}:${minutes}:${seconds}`;
+      // Generate prayer times in order
+      const prayerTimes = orderedPrayers.map(prayer => ({
+        name: prayer,
+        time: new Date(`${currentTime.toDateString()} ${timings[prayer]}`)
+      }));
+
+      // If the current time is after Isha, make Fajr for the next day
+      prayerTimes[0].time.setDate(prayerTimes[0].time.getDate() + 1);
+
+      // Update current prayer index
+      currentPrayerIndex = prayerTimes.findIndex(prayer => prayer.time > currentTime);
+      if (currentPrayerIndex === -1) currentPrayerIndex = 0; // If all prayers have passed, reset to Fajr
+
+      prayerTimes.forEach((prayer, index) => {
+        const card = document.createElement('div');
+        card.classList.add('card');
+
+        if (index === currentPrayerIndex) {
+          card.classList.add('highlight');
+          card.style.backgroundImage = `url('${backgroundImages[prayer.name]}')`;
+          card.innerHTML = `
+            <div class="header">Upcoming Prayer</div>
+            <div class="header">${prayer.name}</div>
+            <div class="countdown" id="countdown-timer">${calculateCountdown(prayer.time)}</div>
+            <div class="time">${timings[prayer.name]}</div>
+          `;
+
+          // Start countdown for the highlighted prayer
+          startCountdown(prayer.time, timings);
+        } else {
+          card.innerHTML = `
+            <div class="header">${prayer.name}</div>
+            <div class="time">${timings[prayer.name]}</div>
+          `;
+        }
+
+        prayerCardsContainer.appendChild(card);
+      });
     }
+
+    function startCountdown(prayerTime, timings) {
+      const countdownInterval = setInterval(() => {
+        const countdownElement = document.getElementById('countdown-timer');
+        if (!countdownElement) {
+          clearInterval(countdownInterval);
+          return;
+        }
+
+        const remainingTime = calculateCountdown(prayerTime);
+        countdownElement.textContent = remainingTime;
+
+        if (remainingTime === '00:00:00') {
+          clearInterval(countdownInterval);
+       
   </script>
 </body>
 </html>
