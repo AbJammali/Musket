@@ -24,7 +24,7 @@
         grid-template-columns: 1fr 3fr; /* Left column for logo, right for content */
         grid-template-rows: 2fr 1fr; /* Right sections stacked */
         gap: 1px;
-        max-width: 1200px;
+        max-width: 1380px;
         margin: 0 auto;
     }
 
@@ -240,92 +240,108 @@
     }
 
     /* Mobile Navigation */
-    .mobile-navigation {
-        display: none; /* Hidden by default; shown on smaller screens */
-    }
+.mobile-navigation {
+    display: none; /* Hidden by default; shown on smaller screens */
+}
 
-    .mobile-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px 20px;
-        background-color: #fff;
-        border-bottom: 1px solid #ccc;
-    }
+.mobile-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #fff;
+    border-bottom: 1px solid #ccc;
+}
 
-    .mobile-logo img {
-        max-height: 50px;
-    }
+.mobile-logo img {
+    max-height: 50px;
+}
 
-    .hamburger-menu {
-        font-size: 24px;
-        cursor: pointer;
-        user-select: none;
-    }
+.hamburger-menu {
+    font-size: 24px;
+    cursor: pointer;
+    user-select: none;
+}
 
-    .mobile-menu {
-        display: none;
-        flex-direction: column;
-        background-color: #f9f9f9;
-        position: absolute;
-        right: 13px;
-        left: 13px;
-        z-index: 100;
-        border-top: 1px solid #ccc;
-        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    }
+.mobile-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #f9f9f9;
+    position: absolute;
+    right: 13px;
+    left: 13px;
+    z-index: 100;
+    border-top: 1px solid #ccc;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
 
-    .mobile-menu ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-    }
+.mobile-menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
 
-    .mobile-menu li {
-        border-bottom: 1px solid #ccc;
-    }
+.mobile-menu li {
+    border-bottom: 1px solid #ccc;
+}
 
-    .mobile-menu a {
-        text-decoration: none;
-        color: #333;
-        display: block;
-        padding: 15px;
-        font-size: 18px;
-    }
+.mobile-menu a {
+    display: flex; /* Flexbox to align items */
+    justify-content: space-between; /* Text on the left, arrow on the right */
+    align-items: center; /* Vertical alignment */
+    text-decoration: none;
+    color: #333;
+    padding: 15px 20px; /* Add padding for spacing */
+    font-size: 18px;
+}
 
-    .mobile-menu a:hover {
-        background-color: #e0e0e0;
-    }
+.mobile-menu a:hover {
+    background-color: #e0e0e0;
+}
 
-    .mobile-menu .mobile-sub-options {
-        display: none;
-        padding-left: 20px;
-        background-color: #f7f7f7;
-    }
+.mobile-menu .arrow {
+    font-size: 18px; /* Match the font size with menu items */
+    color: #666;
+}
 
-    .mobile-menu .mobile-sub-options a {
-        padding: 10px;
-        font-size: 16px;
-    }
+/* Sub-options styling */
+.mobile-menu .mobile-sub-options {
+    display: none;
+    padding-left: 20px;
+    background-color: #f7f7f7;
+}
 
-    .mobile-menu .mobile-mini-options {
-        display: none;
-        padding-left: 40px;
-        background-color: #f0f0f0;
-    }
+.mobile-menu .mobile-sub-options a {
+    display: flex; /* Maintain flex layout */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    font-size: 16px;
+}
 
-    .mobile-menu .mobile-mini-options a {
-        padding: 8px;
-        font-size: 14px;
-    }
+/* Child options styling */
+.mobile-menu .mobile-child-options {
+    display: none;
+    padding-left: 40px;
+    background-color: #f0f0f0;
+}
 
-    .mobile-menu .open > .mobile-sub-options {
-        display: block;
-    }
+.mobile-menu .mobile-child-options a {
+    display: flex; /* Maintain flex layout */
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    font-size: 14px;
+}
 
-    .mobile-menu .open .mobile-sub-options .open > .mobile-mini-options {
-        display: block;
-    }
+/* Open states for sub-options and child-options */
+.mobile-menu .open > .mobile-sub-options {
+    display: block;
+}
+
+.mobile-menu .open .mobile-sub-options .open > .mobile-child-options {
+    display: block;
+}
 
     @media (max-width: 950px) {
         .desktop-navigation, .sub-options-box{
@@ -342,6 +358,7 @@
             bottom: 20px;
             right: 20px;
             display: none; /* Hidden by default for larger screens */
+            z-index: 3;
         }
 
         .menu-icon {
@@ -441,6 +458,7 @@
             opacity: 1; /* Make the container visible */
             transition: opacity 0.5s ease-in-out;
             display: none; /* Hidden by default */
+            z-index: 2;
         }
         .mobile-donate-letter {
                 font-size: 36px;
@@ -638,6 +656,9 @@
   }
     .image-container{
       height: 24vh;  
+    }
+    #prayer-cards-container {
+        flex-wrap: wrap;
     }
 }
 @media screen and (min-width: 432px) and (max-width: 950px) {
@@ -938,7 +959,7 @@
                     <div class="column" id="column2">
                         <ul class="sub-options">
                         <li>
-                            <a href="">Obtion 2</a>
+                            <a href="">Option 2</a>
                             </li>
                         </ul>
                     </div>
@@ -1115,7 +1136,7 @@
                     <div class="column" id="column2">
                             <ul class="sub-options">
                                 <li>
-                            <a href="">Arabic Language cource</a>
+                            <a href="">Arabic Language cources</a>
                               <ul class="mini-options">
                          <!-- <li><a href="">Mini Option 1</a></li>
                                       <li><a href="">Mini Option 2</a></li> -->
@@ -1131,6 +1152,46 @@
                                   <span class="bg-image lazyloaded" style="background-image: url('./quran.png');"></span>
                                   <img src="./quran.png" alt="tafsir-al-quran">
                                   <span class="arrow">Tafsir Al Quran Course</span>
+                                </a>
+                              </div>
+
+                            </div>
+                          </div>
+                    </div>
+                </li>
+                <li data-target="volunteering">
+                    <a href="">Volunteering</a>
+                    <div class="columns-container" id="volunteering">
+                    <div class="column" id="column1">
+                    <ul class="sub-options">
+                       <!-- <li>
+                            <a href="">OPtion 1</a>
+                              <ul class="mini-options">
+                          <li><a href="">Mini Option 1</a></li>
+                                      <li><a href="">Mini Option 2</a></li>
+                                    </ul>
+                        </li> -->
+                             </ul> 
+                        </div>
+                    <div class="column" id="column2">
+                            <ul class="sub-options">
+                         <!--  <li>
+                            <a href="">Option 2</a>
+                              <ul class="mini-options">
+                          <li><a href="">Mini Option 1</a></li>
+                                      <li><a href="">Mini Option 2</a></li>
+                                    </ul>
+                        </li> -->
+                        
+                             </ul>
+                        </div>
+                          <div class="column" id="column3">
+                            <div class="image-column">
+                              <div class="image-item">
+                                <a href="">
+                                  <span class="bg-image lazyloaded" style="background-image: url('./salam.jpg');"></span>
+                                  <img src="./salam.jpg" alt="salam-action">
+                                  <span class="arrow">Salam action</span>
                                 </a>
                               </div>
 
@@ -1156,21 +1217,229 @@
         </div>
         <div class="mobile-menu" id="mobile-menu">
             <ul>
-                <li><a href="">Visit the Center</a>
+                <li role="about-us"><a href="">About us <span class="arrow">›</span></a>
                     <ul class="mobile-sub-options">
                         <li>
-                            <a href="">Sub Option 1</a>
-                                <ul class="mobile-mini-options">
-                                    <li><a href="">Mini Option 1</a></li>
-                                    <li><a href="">Mini Option 2</a></li>
+                            <a href="">Mission and vision</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
                                 </ul>
-                            </li>
+                        </li>
+                        <li>
+                            <a href="">Become a partner of OKM</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">OKM Center</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Contact us</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
                     </ul>
                 </li>
-                <li><a href="">For Educators</a></li>
-                <li><a href="">Family</a></li>
-                <li><a href="">Support Our Center</a></li>
-                <li><a href="">Events</a></li>
+                <li role="plan-your-visit"><a href="">Plan your visit <span class="arrow">›</span></a>
+                <ul class="mobile-sub-options">
+                        <li>
+                            <a href="">Basic Information</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Guided Tours</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Registration</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                </ul>
+                </li>
+                <li role="event-program"><a href="">Event Program <span class="arrow">›</span></a>
+                <ul class="mobile-sub-options">
+                        <li>
+                            <a href="">Basic Information</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Guided Tours</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Registration</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                </ul>
+                </li>
+                <li role="education"><a href="">Education <span class="arrow">›</span></a>
+                <ul class="mobile-sub-options">
+                        <li>
+                            <a href="">kindergarten</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Schools</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Teachers</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Senior citizens</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">People with disabilities</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                </ul>
+                </li>
+                <li role="muslim"><a href="">Muslim <span class="arrow">›</span></a>
+                    <ul class="mobile-sub-options">
+                        <li>
+                            <a href="">Events</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Cources</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Muslim support center <span class="arrow">›</span></a>
+                                <ul class="mobile-child-options">
+                                <li><a href="">Legal aid</a></li>
+                                <li><a href="">Psychological support</a></li>
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Student support centre</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">New Muslims</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Halal Pantry</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Muslim Box</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Marriage</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Funerals</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                </ul></li>
+                <li role="madrasa-al-quran"><a href="">Madrasa Al Quran <span class="arrow">›</span></a>
+                <ul class="mobile-sub-options">
+                        <li>
+                            <a href="">Al Quran cource</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Arabic Language cource</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                        <li>
+                            <a href="">Tafsir Al Quran Course</a>
+                                <ul class="mobile-child-options">
+                          <!--    <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li role="voulunteering"><a href="">Volunteering <span class="arrow">›</span></a>
+                    <ul class="mobile-sub-options">
+                        <li>
+                            <a href="">Salam action</a>
+                                <ul class="mobile-child-options">
+                            <!-- <li><a href="">Mini Option 1</a></li>
+                                    <li><a href="">Mini Option 2</a></li> -->
+                                </ul>
+                        </li>
+                </ul>
+                </li>
             </ul>
         </div>
     </div>
@@ -1279,7 +1548,7 @@
         </div>
     </footer>
     <script>
-        // navigation menu 
+/////////////////////////// desktop navigation menu ///////////////////////////
         document.addEventListener('DOMContentLoaded', () => {
             const mainMenuItems = document.querySelectorAll('.nav-links li');
             const subOptionsContainer = document.getElementById('sub-options-container');
@@ -1331,25 +1600,81 @@
         }, 100);
       });
     });
-        // Function to toggle the mobile menu visibility
-        function toggleMobileMenu() {
-            const menu = document.getElementById("mobile-menu");
-            menu.style.display = menu.style.display === "flex" ? "none" : "flex";
-        }
+////////////////////////// mobile navigation ///////////////////////////////
+        document.addEventListener("DOMContentLoaded", function () {
+    const hamburgerMenu = document.getElementById("hamburger-menu");
+    const mobileMenu = document.getElementById("mobile-menu");
 
-        // Add event listener for hamburger menu to toggle mobile menu
-        document.getElementById("hamburger-menu").addEventListener("click", toggleMobileMenu);
+    // Toggle mobile menu visibility
+    hamburgerMenu.addEventListener("click", () => {
+        mobileMenu.style.display = mobileMenu.style.display === "none" || mobileMenu.style.display === "" ? "flex" : "none";
+    });
 
-        // Add click event to handle sub-menu toggling
-        document.querySelectorAll(".mobile-menu li > a").forEach(link => {
-            link.addEventListener("click", function (e) {
-                const subMenu = this.nextElementSibling;
-                if (subMenu && (subMenu.classList.contains("mobile-sub-options") || subMenu.classList.contains("mobile-mini-options"))) {
-                    e.preventDefault(); // Prevent link navigation
-                    subMenu.parentNode.classList.toggle("open"); // Toggle visibility of sub-options
+    // Handle click events for all parent menu links (to toggle sub-options)
+    document.querySelectorAll(".mobile-menu > ul > li > a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+            const parentLi = this.parentElement;
+            const submenu = parentLi.querySelector(".mobile-sub-options");
+
+            // If there is a submenu (child menu)
+            if (submenu) {
+                e.preventDefault(); // Prevent default link action
+                const isOpen = parentLi.classList.contains("open");
+
+                // Close other menus (siblings and their submenus)
+                if (!isOpen) {
+                    closeOtherMenus(parentLi); // Close other open menus
                 }
-            });
+
+                // Toggle the current menu (open or close)
+                parentLi.classList.toggle("open", !isOpen);
+
+                // Rotate arrow
+                const arrow = this.querySelector(".arrow");
+                if (arrow) {
+                    arrow.style.transform = isOpen ? "rotate(0deg)" : "rotate(90deg)";
+                }
+            }
         });
+    });
+
+    // Handle click events for submenu links to toggle their child options
+    document.querySelectorAll(".mobile-menu .mobile-sub-options > li > a").forEach((link) => {
+        link.addEventListener("click", function (e) {
+            const parentLi = this.parentElement;
+            const childMenu = parentLi.querySelector(".mobile-child-options");
+
+            // If there is a child menu (deeper level)
+            if (childMenu) {
+                e.preventDefault(); // Prevent default link action
+                const isOpen = parentLi.classList.contains("open");
+
+                // Toggle the current child menu
+                parentLi.classList.toggle("open", !isOpen);
+
+                // Rotate arrow for child menus
+                const arrow = this.querySelector(".arrow");
+                if (arrow) {
+                    arrow.style.transform = isOpen ? "rotate(0deg)" : "rotate(90deg)";
+                }
+            }
+        });
+    });
+
+    // Close all other menus except the current branch (parent and child)
+    function closeOtherMenus(currentParent) {
+        const allOpenMenus = document.querySelectorAll(".mobile-menu li.open");
+        allOpenMenus.forEach((li) => {
+            if (!currentParent.contains(li)) {
+                li.classList.remove("open");
+                const arrow = li.querySelector(".arrow");
+                if (arrow) {
+                    arrow.style.transform = "rotate(0deg)";
+                }
+            }
+        });
+    }
+});
         // Function to toggle the mobile language visibility
         function toggleMenu() {
             const menuOptions = document.getElementById('menuOptions');
@@ -1361,7 +1686,7 @@
             // Toggle the animation of the menu icon
             menuIcon.classList.toggle('open');
         };
-        // Function for animation slider
+//////////////////// Function for animation slider ////////////////////////
         let currentSlide = 0;
         const slideInterval = 3000; // 3 seconds for auto-slide
 
@@ -1398,7 +1723,7 @@
         setInterval(() => {
             moveSlide(1); // Move to the next slide every 3 seconds
         }, slideInterval);
-// Reset donation mobile button to initial position after 3 sec
+//////////////////// Reset donation mobile button to initial position after 3 sec/////////////
 const donateButton = document.getElementById('mobile-donate-btn');
     const letter = document.getElementById('mobile-donate-letter');
 
@@ -1458,7 +1783,7 @@ const donateButton = document.getElementById('mobile-donate-btn');
     // Set the initial position when the page loads
     donateButton.style.transform = initialButtonPosition;
         
-    //Text animation for main picture
+//////////////////////Text animation for main picture/////////////////////////////////////
 function typeTextSequence(elementId, texts, speed, delayBetweenTexts) {
   const element = document.getElementById(elementId);
   let textIndex = 0;
@@ -1506,7 +1831,7 @@ const textList = [
 const typingSpeed = 100; // Adjust speed of typing (milliseconds per character)
 const delayBetweenTexts = 3000; // Delay between texts in milliseconds
 typeTextSequence('centered-text', textList, typingSpeed, delayBetweenTexts);
-// Praying Time 
+////////////////////////////////// Praying Time /////////////////////////////////////
    const apiUrl = "https://api.aladhan.com/v1/timingsByCity?city=Warsaw&country=Poland&method=3";
 
     fetch(apiUrl)
