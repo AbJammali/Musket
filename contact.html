@@ -1,23 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Form</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-image: url(body-formula.png);
+    background-size: cover;
+        
+    }
+
+    form {
+      background-image:url(contact-formula.png);
+        background-repeat: no-repeat;
+        background-position: center top;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 68px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      display: block;
+      margin-bottom: 15px;
+    }
+
+    label input,
+    label textarea {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 7px;
+      font-size: 14px;
+      box-sizing: border-box;
+        font-family: math;
+    }
+
+    label textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    button {
+      background-color: transparent;
+      text-transform: uppercase;
+        color: #ecf0f1;
+      border: none;
+      border-radius: 4px;
+      padding: 10px 15px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 100%;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background: linear-gradient(90deg, #FFD700, #FFAA00, #FFD700);
+    }
+      .contact-container {
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        .contact-column,
+        .contact-logo {
+            text-align: center;
+        }
+        .contact-logo img {
+            max-width: 150px;
+            height: auto;
+        }
+      .contact-column h3 {
+        font-size: 23px;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        color: #ecf0f1;
+      }
+
+  </style>
 </head>
 <body>
-    <h2>Contact Us</h2>
-    <form action="./send_email.php" method="POST">
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name" required><br><br>
 
-        <label for="email">Email:</label><br>
-        <input type="email" id="email" name="email" required><br><br>
+<form action="https://formspree.io/f/xovvrgyl" method="POST">
 
-        <label for="message">Message:</label><br>
-        <textarea id="message" name="message" required></textarea><br><br>
+            
+<div class="contact-container">
+            <!-- Logo Section -->
+            <div class="contact-logo">
+                <a>
+                    <img src="./logo-formula.png" alt="Company Logo">
+                </a>
+            </div>
+            <!-- formula section -->
+            <div class="contact-column">
+  <label>
+      <h3>Your email address</h3>
+    <input type="email" name="email" placeholder="Enter your email address" required>
+  </label>
+  <label>
+      <h3>Your message</h3>
+    <textarea name="message" placeholder="Type your message here..." required></textarea>
+  </label>
+  <button class="form-submit" type="submit">Send</button>
+    </div>
+    </div>
+</form>
 
-        <button type="submit">Send Message</button>
-    </form>
 </body>
 </html>
