@@ -29,13 +29,15 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
+    
     label {
       display: block;
       margin-bottom: 15px;
     }
 
     label input,
-    label textarea {
+    label textarea,
+    label select {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -95,25 +97,36 @@
             
 <div class="contact-container">
             <!-- Logo Section -->
-            <div class="contact-logo">
-                <a>
-                    <img src="./logo-formula.png" alt="Company Logo">
-                </a>
+          <div class="contact-logo">
+             <a><img src="./logo-formula.png" alt="Company Logo"></a>
+          </div>
+        <!-- formula section -->
+        <div class="contact-column">
+            <label>
+            <input type="text" id="name" name="name" required placeholder="Enter your name">
+            </label>
+            <label>
+            <input type="email" id="email" name="email" required placeholder="Enter your email address">
+            </label>
+            <label>
+            <select type="subject" id="subject" name="subject" required>
+                    <option value="">Select your subject</option>
+                    <option value="Become a partner of OKM">Become a partner of OKM</option>
+                    <option value="Marriage">Education</option>
+                    <option value="Marriage">Marriage</option>
+                    <option value="Funerals">Funerals</option>
+                    <option value="Madrasa Al Quran">Madrasa Al Quran</option>
+                    <option value="other">Other</option>
+                </select>
+            </label>
+            <label>
+                <textarea id="message" name="message" rows="4" required placeholder="Type your message here..."></textarea>
+            </label>
+
+            <button type="submit">Send Message</button>
             </div>
-            <!-- formula section -->
-            <div class="contact-column">
-  <label>
-      <h3>Your email address</h3>
-    <input type="email" name="email" placeholder="Enter your email address" required>
-  </label>
-  <label>
-      <h3>Your message</h3>
-    <textarea name="message" placeholder="Type your message here..." required></textarea>
-  </label>
-  <button class="form-submit" type="submit">Send</button>
-    </div>
-    </div>
-</form>
+        </div>
+    </form>
 
 </body>
 </html>
