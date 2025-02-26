@@ -56,8 +56,8 @@
     text-align: left;
 }
 .arabic .subject-content p, 
-.subject-content h3,
-.subject-content .bullet-list {
+.arabic .subject-content h3,
+.arabic .subject-content .bullet-list {
     text-align: right;
 }
 .subject-content h2 {
