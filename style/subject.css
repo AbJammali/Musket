@@ -1,0 +1,101 @@
+.subject {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.subject-title {
+    position: absolute;
+    left: 0;
+    top: 62%;
+    width: 200px;
+    text-align: end;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 20px;
+    border-bottom: 3px solid #0F8A8C;
+}
+@media (max-width: 440px) {
+    .subject-title {
+        width: 130px;
+    }
+}
+.muslim .subject-title {
+    width: 190px;
+}
+.subject-title h1 {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.subject-content {
+    margin: 20px;
+    text-align: center;
+    padding: 21px;
+    border: 1px solid white;
+    border-radius: 17px;
+    background-color: white;
+}
+
+.subject-content h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.subject-content p, 
+.subject-content h3,
+.subject-content .bullet-list {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+}
+.arabic .subject-content p, 
+.subject-content h3,
+.subject-content .bullet-list {
+    text-align: right;
+}
+.subject-content h2 {
+    text-align: center;
+}
+
+.subject-content .bullet-list {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    left: 30px;
+    position: relative;
+}
+
+.subject-content .bullet-list p {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+.muslim .subject-content .bullet-list p {
+    font-size: 16px;
+    display: flow;
+}
+.subject-content .bullet {
+    padding-right: 10px; /* Space between bullet and text */
+    display: inline-block;
+}
+#subject-about-us {
+    background-image: url(/Musket/image/body/about-us.jpeg);
+}
+#subject-visit-us {
+    background-image: url(/Musket/image/body/visit-us.jpg);
+}
+#subject-education {
+    background-image: url(/Musket/image/body/education.jpg);
+}
+#subject-muslim {
+    background-image: url(/Musket/image/body/muslim.jpg);
+}
