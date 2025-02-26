@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./icon.png" type="image/x-icon">
+  <title>Audio Autoplay Policy</title>
+  <script>
+    function startAudioWithPolicy() {
+      const audioPlayer = document.getElementById('audio-player');
+      const policyNotification = document.getElementById('policy-notification');
+      const overlay = document.getElementById('overlay');  // Get overlay element
+
+      // Hide the notification and remove the overlay after clicking
+      policyNotification.style.display = 'none';
+      overlay.style.display = 'none';  // Hide the overlay
+
+      // Play the audio immediately after interaction
+      audioPlayer.play().then(() => {
+        showNotification("The audio is now playing!");
+      }).catch(error => {
+        showNotification("Audio couldn't play due to browser restrictions. Please check your browser settings.");
+        console.error(error);
+      });
+    }
+
+    function showNotification(message) {
+      const notification = document.getElementById('notification');
+      notification.textContent = message;
+      notification.style.display = 'block';
+    }
+  </script>
+  <style>
+    /* Notification styling */
+    #notification {
+      display: none;
+      background-color: #f0f0f0;
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-top: 20px;
+      font-size: 1rem;
+      color: #333;
+      border-radius: 5px;
+    }
+
+    /* Cookie-style notification container */
+    #policy-notification {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      padding: 20px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    /* Button inside the notification */
+    #policy-button {
+      margin-left: 10px;
+      padding: 10px 20px;
+      background-color: green;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    #policy-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Smooth fade-in effect for notification */
+    #policy-notification {
+      animation: fadeIn 0.5s;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Overlay to gray out the page */
+    #overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5); /* Darken the background */
+      z-index: 999;  /* Ensure it sits above content */
+    }
+
+    /* Ensure the rest of the content remains visible */
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Welcome!</h1>
+  <p>Audio playback will begin after you acknowledge the policy.</p>
+
+  <!-- Overlay to gray out the page until button is clicked -->
+  <div id="overlay"></div>
+
+  <!-- Cookie-style policy notification -->
+  <div id="policy-notification">
+    <span>We need your consent to play audio on this page. Click "Allow Audio" to proceed.</span>
+    <button id="policy-button" onclick="startAudioWithPolicy()">Allow Audio</button>
+  </div>
+    
+  <!-- Notification element -->
+  <div id="notification"></div>
+
+  <!-- Audio Element -->
+  <audio id="audio-player" src="./adan.mp3"></audio>
+</body>
+</html>
