@@ -453,10 +453,12 @@ body.lang-ru .nav-links a {
 .mobile-donate-sticky {
     position: fixed;
     top: 40%;
+    right: 0;
+    pointer-events: none;
     display: flex;
     justify-content: flex-end;
     align-items: center;
-    width: 100%;
+    width: auto;
     opacity: 1; /* Make the container visible */
     transition: opacity 0.5s ease-in-out;
     display: none; /* Hidden by default */
@@ -499,6 +501,10 @@ body.lang-ru .nav-links a {
     rotate: 180deg;
     transform: translateX(-70%); /* Start off-screen */
     transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+}
+.mobile-donate-letter,
+.mobile-donate-btn {
+    pointer-events: auto;
 }
 /* Keyframes for gold gradient animation */
 @keyframes goldShimmer {
