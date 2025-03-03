@@ -16,11 +16,11 @@
           const prayerCardsContainer = document.getElementById('prayer-cards-container');
           const orderedPrayers = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"]; // Only main 5 prayers
           const backgroundImages = {
-            Fajr: '/Musket3/image/praying/fajr-pray.png', // Example background image for Fajr
-            Dhuhr: '/Musket3/image/praying/dohr-pray.png',
-            Asr: '/Musket3/image/praying/asr-pray.png',
-            Maghrib: '/Musket3/image/praying/magreb-pray.png',
-            Isha: '/Musket3/image/praying/isha-pray.jpg',
+            Fajr: '/Musket/image/praying/fajr-pray.png', // Example background image for Fajr
+            Dhuhr: '/Musket/image/praying/dohr-pray.png',
+            Asr: '/Musket/image/praying/asr-pray.png',
+            Maghrib: '/Musket/image/praying/magreb-pray.png',
+            Isha: '/Musket/image/praying/isha-pray.jpg',
           };
 
           orderedPrayers.forEach(prayer => {
