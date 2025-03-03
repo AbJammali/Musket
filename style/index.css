@@ -305,7 +305,9 @@ html[lang="ar"] .mobile-menu {
 .mobile-menu .arrow {
     color: #666;
     font-size: 25px;
-    padding-left: 26px;
+    width: 30px;
+    padding-left: 20px;
+    padding-bottom: 5px;
 }
 
 /* Sub-options styling */
