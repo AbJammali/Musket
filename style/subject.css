@@ -23,7 +23,11 @@
         width: 190px;
     }
 }
-html[lang="ar"]  .subject-title {
+html[lang="pl"]  .subject-title,
+html[lang="en"]  .subject-title,
+html[lang="ar"]  .subject-title,
+html[lang="ru"]  .subject-title,
+{
     width: 190px;
 }
 .subject-title h1 {
