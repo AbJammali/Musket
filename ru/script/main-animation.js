@@ -39,9 +39,9 @@ function typeTextSequence(elementId, texts, speed, delayBetweenTexts) {
 
 // Usage:
 const textList = [
-  "In The Name of Allah, The Most Beneficent, The Most Merciful.",
-  "There is no deity but You. Glory be to You! Verily, I have been among the wrongdoers",
-  "O Allah, grant us the good in this world and the good in the Hereafter and save us from the torment of Hell-Fire"
+"Во имя Аллаха, Благодетельного, Милосердного",
+  "Нет божества, кроме Тебя. Слава Тебе! Воистину, я был среди злодеев",
+  "О Аллах, даруй нам блага в этом мире и блага в загробном мире и избавь нас от мук Адского огня"
 ];
 const typingSpeed = 100; // Adjust speed of typing (milliseconds per character)
 const delayBetweenTexts = 3000; // Delay between texts in milliseconds
