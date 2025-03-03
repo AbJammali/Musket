@@ -30,7 +30,7 @@ html[lang="ru"]  .subject-title,
 {
     width: 190px;
 }
-.subject-about-us .subject-title {
+#subject-about-us .subject-title {
     width: 80px;
 }
 .subject-title h1 {
