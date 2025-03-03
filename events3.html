@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="pl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" sizes="32x32" href="/Musket/image/body/icon.png">
+
+        <title>Events</title>
+
+        <style>
+            *,:after,:before {
+                box-sizing: border-box
+            }
+            .page-wrap .header-card-sponsor a {
+                text-decoration: none;
+                cursor: pointer;
+                color: #0F8A8C;
+                margin-right: -39px; /* Adjust the margin to the left */
+                transition: transform 0.3s ease, opacity 0.3s ease;
+                display: inline-block;
+                background: radial-gradient(ellipse farthest-corner at right bottom, #0F8A8C 0%, #0F8A8C 8%, #0F8A8C 30%, #0F8A8C 40%, transparent 80%),
+                    radial-gradient(ellipse farthest-corner at left top, #032E3B 8%, #032E3B 25%, #032E3B 62.5%, #0F8A8C 100%);
+                background-size: 300%;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                animation: goldShimmer 3s infinite;
+            }
+
+            article {
+                display: block;
+            }
+
+            .mini-card-title a:focus, .mini-card-title a:hover {
+                opacity: .66;
+            }
+
+            .mega-header,.page-wrap {
+                max-width: var(--maxWidth);
+                margin: 0 auto;
+                padding: 0 var(--gap);
+                font-size-body: clamp(12px,calc(0.8rem + 0.25vw),20px);
+                font-family: Blanco,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+                font-size: var(--font-size-body);
+                font-weight: 400;
+                line-height: 1.7;
+                --maxWidth: 1600px;
+                --gap: 3rem;
+                scrollbar-color: #666 #201c29;
+                color: #fff;
+                overflow-x: hidden;
+            }
+
+            main {
+                position: relative;
+                z-index: 1;
+            }
+            .popular-articles {
+                box-sizing: content-box;
+                display: flex;
+                margin: 0 0 var(--gap) 0;
+                position: relative;
+            }
+
+            @media (min-width: 1200px) {
+                .popular-articles:after {
+                    content:"";
+                    position: absolute;
+                    right: 0;
+                    top: 2.5rem;
+                    bottom: 3.6rem;
+                    width: 5px;
+                    border-radius: 5px;
+                    background: radial-gradient(ellipse farthest-corner at right bottom, #B77A2F 0%, #B77A2F 4%, #DEB34F 30%, #DEB34F 40%, transparent 80%),
+                        radial-gradient(ellipse farthest-corner at left top, #B77A2F 4%, #DEB34F 25%, #DEB34F 62.5%, #B77A2F 100%);
+                    box-shadow: -10px 0 20px 3px #000;
+                    z-index: 1;
+                }
+            }
+
+            @media (max-width: 1200px) {
+                .popular-articles {
+                    scrollbar-color:#666 #0F8A8C;
+                    padding-bottom: var(--gap);
+                    padding-left: 5px;
+                    overflow-x: scroll;
+                    -webkit-overflow-scrolling: touch;
+                    -ms-scroll-snap-points-x: repeat(250px);
+                    scroll-snap-points-x: repeat(250px);
+                    -ms-scroll-snap-type: mandatory;
+                    scroll-snap-type: mandatory;
+                    -ms-scroll-snap-type: x mandatory;
+                    scroll-snap-type: x mandatory;
+                    -webkit-scroll-snap-type: x mandatory;
+                }
+
+                .popular-articles::-webkit-scrollbar {
+                    width: 10px;
+                    height: 10px;
+                }
+
+                .popular-articles::-webkit-scrollbar-thumb {
+                    background: #434343;
+                    border-radius: 10px;
+                    box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25),inset -2px -2px 2px rgba(0,0,0,.25);
+                }
+
+                .popular-articles::-webkit-scrollbar-track {
+                    background: linear-gradient(90deg,#434343,#434343 1px,#262626 0,#262626);
+                }
+                .popular-articles .mini-card {
+                    scroll-snap-align: start;
+                }
+            }
+
+            .popular-header {
+                margin-top: 4rem;
+                flex: 0 0 250px;
+                margin-right: 1rem;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-end;
+                padding: 1.5rem;
+                transform: translateY(-10px);
+            }
+
+            @media (max-width: 1200px) {
+                .popular-header {
+                    scroll-snap-align:start;
+                    scroll-margin-inline-start: 5px;
+                }
+            }
+
+            .popular-header h2 {
+                color: #fff;
+            }
+
+            .popular-header .edit-popular {
+                position: absolute;
+                top: 5px;
+                right: 5px;
+            }
+
+            .popular-header p {
+                margin: 0;
+            }
+
+            .popular-header:before {
+                content: "";
+                background: radial-gradient(ellipse farthest-corner at right bottom, #0F8A8C 0%, #0F8A8C 8%, #0F8A8C 30%, #0F8A8C 40%, transparent 80%),
+                    radial-gradient(ellipse farthest-corner at left top, #032E3B 8%, #032E3B 25%, #032E3B 62.5%, #0F8A8C 100%);
+                position: absolute;
+                top: -5px;
+                left: -5px;
+                width: calc(100% + 10px);
+                height: calc(100% + 10px);
+                z-index: 1;
+                border-radius: 12px;
+            }
+
+            .popular-header:after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: radial-gradient(ellipse farthest-corner at right bottom, #B77A2F 0%, #B77A2F 4%, #DEB34F 30%, #DEB34F 40%, transparent 80%),
+                    radial-gradient(ellipse farthest-corner at left top, #B77A2F 4%, #DEB34F 25%, #DEB34F 62.5%, #B77A2F 100%);
+                background-size: 300%;
+                -webkit-text-fill-color: #ecf0f1;
+                animation: goldShimmer 3s infinite;
+                z-index: 2;
+                border-radius: 8px;
+            }
+
+            .popular-header>* {
+                position: relative;
+                z-index: 3;
+            }
+
+            @media (max-width: 800px) {
+                .popular-header {
+                    flex:0 0 175px;
+                }
+            }
+
+            .mini-card-grid {
+                display: grid;
+                gap: 1rem;
+                grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+                margin: 0 0 1.5rem;
+                position: relative;
+            }
+
+            .mini-card-grid {
+                scrollbar-color: #DEB34F #0F8A8C;
+                scrollbar-gutter: always;
+                padding: 3rem 0 3rem 2rem;
+                margin: 0;
+                display: flex;
+                overflow-x: scroll;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .mini-card-grid::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+            }
+
+            .mini-card-grid::-webkit-scrollbar-thumb {
+                background: #434343;
+                border-radius: 10px;
+                box-shadow: inset 2px 2px 2px hsla(0,0%,100%,.25),inset -2px -2px 2px rgba(0,0,0,.25);
+            }
+
+            .mini-card-grid::-webkit-scrollbar-track {
+                background: linear-gradient(90deg,#434343,#434343 1px,#262626 0,#262626);
+            }
+
+            @media (max-width: 1200px) {
+                .mini-card-grid {
+                    overflow-x:visible;
+                }
+            }
+
+            .mini-card {
+                padding: 1.5rem;
+                border-radius: 16px;
+                background: linear-gradient(85deg, #434343, #262626);
+                color: #fff;
+                display: flex;
+                flex-direction: column;
+                transition: .2s;
+                margin: 0;
+                position: relative;
+                z-index: 1; /* Set the initial stacking context */
+            }
+
+            .mini-card:hover {
+                transform: translateY(-1rem) rotate(3deg);
+                z-index: 10; /* Bring the hovered card to the front */
+            }
+
+            .mini-card:focus-within,
+            .mini-card:hover {
+                transform: translateY(-1rem) rotate(3deg);
+                z-index: 10; /* Ensure it stays on top when focused */
+            }
+
+            .mini-card:before {
+                content: "";
+                background: radial-gradient(ellipse farthest-corner at right bottom, #B77A2F 0%, #B77A2F 4%, #DEB34F 30%, #DEB34F 40%, transparent 80%),
+                    radial-gradient(ellipse farthest-corner at left top, #B77A2F 4%, #DEB34F 25%, #DEB34F 62.5%, #B77A2F 100%);
+                position: absolute;
+                top: -2px;
+                left: -2px;
+                width: calc(100% + 4px);
+                height: calc(100% + 4px);
+                z-index: 1;
+                border-radius: 10px;
+            }
+
+            .mini-card:after {
+                content: "";
+                background: radial-gradient(ellipse farthest-corner at right bottom, #0F8A8C 0%, #0F8A8C 8%, #0F8A8C 30%, #0F8A8C 40%, transparent 80%),
+                    radial-gradient(ellipse farthest-corner at left top, #032E3B 8%, #032E3B 25%, #032E3B 62.5%, #0F8A8C 100%);;
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 2;
+                border-radius: 8px;
+            }
+
+            .mini-card>* {
+                position: relative;
+                z-index: 3;
+            }
+
+
+
+            .mini-card a {
+                text-decoration: none;
+            }
+
+            .mini-card h3 a {
+                color: #fff!important;
+            }
+
+            .mini-card h3 .aal_anchor {
+                display: none;
+            }
+
+            .mini-card .location {
+                margin: 0 0 .5rem;
+            }
+
+            .mini-card .author-name {
+                color: #fff;
+            }
+
+            .mini-card time {
+                display: block;
+                margin: 0 0 .25rem;
+                color: #777;
+            }
+
+            .mini-card time strong {
+                color: #d4d4d4;
+            }
+
+            .mini-card {
+                min-width: 300px;
+                min-height: 300px;
+                box-shadow: -2rem 0 3rem -2rem #000;
+            }
+
+            .mini-card:focus-within, .mini-card:hover {
+                transform: translateY(-1rem) rotate(3deg);
+            }
+
+            .mini-card:focus-within~.mini-card, .mini-card:hover~.mini-card {
+                transform: translateX(130px);
+            }
+
+            .mini-card:first-child:focus-within, .mini-card:first-child:hover {
+                transform: translate(-.5rem,-1rem) rotate(3deg);
+            }
+
+            .mini-card:not(:first-child) {
+                margin-left: -130px;
+                box-shadow: -3rem 0 3rem -2rem #000;
+            }
+
+            @media (max-width: 1200px) {
+                .mini-card {
+                    min-width:220px;
+                }
+
+                .mini-card:not(:first-child) {
+                    margin-left: -30px;
+                }
+
+                .mini-card:hover {
+                    transform: translateY(-1rem);
+                }
+
+                .mini-card:hover~.mini-card {
+                    transform: translateX(30px);
+                }
+            }
+
+            @media (max-width: 800px) {
+                .mini-card {
+                    min-width:190px;
+                }
+
+                .mini-card:not(:first-child) {
+                    margin-left: -10px;
+                }
+
+                .mini-card:hover {
+                    transform: translateY(-1rem);
+                }
+
+                .mini-card:hover~.mini-card {
+                    transform: translateX(10px);
+                }
+            }
+
+            .mini-card-title {
+                font-size: 1.3rem;
+                margin: 0 0 1rem;
+            }
+
+            .in-article-cards {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+            }
+
+            .in-article-cards .guides {
+                display: block;
+            }
+
+            .in-article-card,.in-article-cards .guides {
+                box-shadow: 0 .5rem 1.2rem rgba(0,0,0,.2);
+                padding: .75rem 1.25rem;
+            }
+
+            .in-article-card {
+                border-radius: 8px;
+                border: 1px solid #eaeaea;
+            }
+
+            .in-article-card h3 {
+                margin: 0 0 .5rem!important;
+                font-size: 1.2rem;
+            }
+
+            .in-article-card h3 .aal_anchor {
+                display: none;
+            }
+
+            .in-article-card time {
+                font-size: .9rem;
+            }
+
+            .in-article-card a {
+                text-decoration: none;
+            }
+
+            .in-article-card .almanac-example {
+                display: block;
+                font-size: .8rem;
+                background: #262626;
+                text-decoration: none;
+                padding: 1rem;
+                border-radius: 4px;
+            }
+
+            .in-article-card .author-row {
+                margin-top: 2.5rem;
+                grid-template-columns: 25px 1fr;
+            }
+
+            .in-article-card .avatar {
+                width: 25px;
+                height: 25px!important;
+                display: block;
+            }
+
+            .in-article-card .author-name {
+                font-size: 1rem;
+            }
+
+            .link-read-more {
+                display: inline-flex;
+                align-items: center;
+            }
+
+            .link-read-more img {
+                -webkit-margin-start: 1rem;
+                margin-inline-start:1rem}
+
+            .location {
+                line-height: 1;
+                margin: 0 0 .5rem;
+            }
+
+            .location a {
+                font-family: MD Primer Bold,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
+                font-style: normal;
+                font-weight: 700;
+                text-transform: uppercase;
+                color: #ff7a18;
+                font-size: .66rem;
+                -webkit-margin-end: .66rem;
+                margin-inline-end:.66rem;
+            }
+            .h3,h3 {
+                font-family: MD Primer Bold,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: 2rem;
+                letter-spacing: .03rem;
+                font-weight: 800;
+            }
+            .h2,h2 {
+                font-family: MD Primer Bold,Rubik,Lato,Lucida Grande,Lucida Sans Unicode,Tahoma,Sans-Serif;
+                font-style: normal;
+                font-weight: 700;
+                font-size: clamp(1.8rem,1.8rem + .2vw,3rem);
+                font-weight: 800;
+            }
+            .author-row {
+                display: grid;
+                grid-template-columns: 40px 1fr;
+                gap: .5rem;
+                align-items: center;
+                color: #565656;
+                line-height: 1.3;
+                padding-top: .5rem;
+            }
+
+            .author-row>div>* {
+                white-space: nowrap;
+            }
+
+            .newsletter-card-grid .author-row {
+                display: block;
+            }
+
+            .avatar {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: .5rem;
+            }
+
+            .author-name {
+                font-weight: 700;
+                color: #000;
+            }
+            .breadcrumbs .breadcrumb_last,h1,h2,h3,h4,h5,h6 {
+                font-weight: 800;
+                margin: 0 0 1.5rem;
+                line-height: 1.1;
+            }
+            @media (max-width: 440px) {
+                body {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    overflow: hidden; /* Prevent body scrolling */
+                    height: 100vh;
+                }
+
+                .scroll-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                    height: 100vh; /* Full viewport height */
+                    overflow-y: auto;
+                    scroll-snap-type: y mandatory;
+                    scrollbar-width: none; /* Hide scrollbar (Firefox) */
+                    -ms-overflow-style: none; /* Hide scrollbar (IE/Edge) */
+                }
+
+                .scroll-container::-webkit-scrollbar {
+                    display: none; /* Hide scrollbar (Chrome/Safari) */
+                }
+
+                .section {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 100%;
+                    height: 100vh; /* Full screen height for each section */
+                    scroll-snap-align: start;
+                    justify-content: center;
+                }
+
+                .popular-header {
+                    width: 90%;
+                    max-width: 400px;
+                }
+                .popular-articles {
+                    display: inline-flex;
+                    flex-direction: column;
+                }
+                .mini-card-grid {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    width: 90%;
+                    max-width: 400px;
+                    gap: 15px;
+                }
+
+                .mini-card {
+                    width: 100%;
+                    min-height: 100px;
+                }
+                .mini-card:not(:first-child) {
+                    margin-left: 0px;
+                }
+                .mini-card-grid {
+                    padding: 0;
+                }
+                main {
+                    height: 380px;
+                }
+            }
+
+
+
+        </style>
+    </head>
+    <body>
+        <div class="page-wrap">
+            <main id="maincontent">
+                <div class="popular-articles">
+                    <div class="popular-header header-card">
+                        <h2 class="header-card-title">
+                            Wydarzenia <br>w tym <br>miesiącu
+                        </h2>
+                        <p class="header-card-sponsor">
+                            Zorganizowane przez
+                            <br>
+                            <a href="">OKM</a>
+                        </p>
+                    </div>
+                    <div class="mini-card-grid">
+                        <article class="mini-card module module-article articles" id="mini-post-1">
+                            <time datetime="2025-01-13" title="Originally published Jan 13, 2025">
+                                <strong>Wydarzenia</strong>
+                                w Sty 27, 2025</time>
+                            <h3 class="mini-card-title">
+                                <a href="#">Kobiety gromadzą się na konkursie Koranu</a>
+                            </h3>
+                            <div class="location">
+                                <a href="#" rel="tag">Lokalizacja</a>
+                            </div>
+                            <div class="author-row">
+                                <a href="" aria-label="With sleep on place option">
+                                    <img loading="eager" alt="" class="avatar avatar-80 photo avatar-default" height="80" src="/Musket/image/events/organizer.png" width="80">    </a>
+                                <a class="author-name" href="">Imię nauczyciela</a>
+                            </div>
+                        </article>
+                        <article class="mini-card module module-article articles" id="mini-post-2">
+                            <time datetime="2025-01-13" title="Originally published Jan 13, 2025">
+                                <strong>Wydarzenia</strong>
+                                w Sty 27, 2025</time>
+                            <h3 class="mini-card-title">
+                                <a href="#">Kobiety gromadzą się na konkursie Koranu</a>
+                            </h3>
+                            <div class="location">
+                                <a href="#" rel="tag">Lokalizacja</a>
+                            </div>
+                            <div class="author-row">
+                                <a href="" aria-label="With sleep on place option">
+                                    <img loading="eager" alt="" class="avatar avatar-80 photo avatar-default" height="80" src="/Musket/image/events/organizer.png" width="80">    </a>
+                                <a class="author-name" href="">Imię nauczyciela</a>
+                            </div>
+                        </article>
+                        <article class="mini-card module module-article articles" id="mini-post-3">
+                            <time datetime="2025-01-13" title="Originally published Jan 13, 2025">
+                                <strong>Wydarzenia</strong>
+                                w Sty 27, 2025</time>
+                            <h3 class="mini-card-title">
+                                <a href="#">Kobiety gromadzą się na konkursie Koranu</a>
+                            </h3>
+                            <div class="location">
+                                <a href="#" rel="tag">Lokalizacja</a>
+                            </div>
+                            <div class="author-row">
+                                <a href="" aria-label="With sleep on place option">
+                                    <img loading="eager" alt="" class="avatar avatar-80 photo avatar-default" height="80" src="/Musket/image/events/organizer.png" width="80">    </a>
+                                <a class="author-name" href="">Imię nauczyciela</a>
+                            </div>
+                        </article>
+                        <article class="mini-card module module-article articles" id="mini-post-4">
+                            <time datetime="2025-01-13" title="Originally published Jan 13, 2025">
+                                <strong>Wydarzenia</strong>
+                                w Sty 27, 2025</time>
+                            <h3 class="mini-card-title">
+                                <a href="#">Kobiety gromadzą się na konkursie Koranu</a>
+                            </h3>
+                            <div class="location">
+                                <a href="#" rel="tag">Lokalizacja</a>
+                            </div>
+                            <div class="author-row">
+                                <a href="" aria-label="With sleep on place option">
+                                    <img loading="eager" alt="" class="avatar avatar-80 photo avatar-default" height="80" src="/Musket/image/events/organizer.png" width="80">    </a>
+                                <a class="author-name" href="">Imię nauczyciela</a>
+                            </div>
+                        </article>
+                        <article class="mini-card module module-article articles" id="mini-post-5">
+                            <time datetime="2025-01-13" title="Originally published Jan 13, 2025">
+                                <strong>Wydarzenia</strong>
+                                w Sty 27, 2025</time>
+                            <h3 class="mini-card-title">
+                                <a href="#">Kobiety gromadzą się na konkursie Koranu</a>
+                            </h3>
+                            <div class="location">
+                                <a href="#" rel="tag">Lokalizacja</a>
+                            </div>
+                            <div class="author-row">
+                                <a href="" aria-label="With sleep on place option">
+                                    <img loading="eager" alt="" class="avatar avatar-80 photo avatar-default" height="80" src="/Musket/image/events/organizer.png" width="80">    </a>
+                                <a class="author-name" href="">Imię nauczyciela</a>
+                            </div>
+                        </article>
+                        <article class="mini-card module module-article articles" id="mini-post-6">
+                            <time datetime="2025-01-13" title="Originally published Jan 13, 2025">
+                                <strong>Wydarzenia</strong>
+                                w Sty 27, 2025</time>
+                            <h3 class="mini-card-title">
+                                <a href="#">Kobiety gromadzą się na konkursie Koranu</a>
+                            </h3>
+                            <div class="location">
+                                <a href="#" rel="tag">Lokalizacja</a>
+                            </div>
+                            <div class="author-row">
+                                <a href="" aria-label="With sleep on place option">
+                                    <img loading="eager" alt="" class="avatar avatar-80 photo avatar-default" height="80" src="/Musket/image/events/organizer.png" width="80">    </a>
+                                <a class="author-name" href="">Imię nauczyciela</a>
+                            </div>
+                        </article>
+                        <article class="mini-card module module-article articles" id="mini-post-7">
+                            <time datetime="2025-01-13" title="Originally published Jan 13, 2025">
+                                <strong>Wydarzenia</strong>
+                                w Sty 27, 2025</time>
+                            <h3 class="mini-card-title">
+                                <a href="#">Kobiety gromadzą się na konkursie Koranu</a>
+                            </h3>
+                            <div class="location">
+                                <a href="#" rel="tag">Lokalizacja</a>
+                            </div>
+                            <div class="author-row">
+                                <a href="" aria-label="With sleep on place option">
+                                    <img loading="eager" alt="" class="avatar avatar-80 photo avatar-default" height="80" src="/Musket/image/events/organizer.png" width="80">    </a>
+                                <a class="author-name" href="">Imię nauczyciela</a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </body>
+</html>
