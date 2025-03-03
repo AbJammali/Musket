@@ -71,7 +71,6 @@ body {
     border-radius: 4px;
     color: #fff; /* Text color for readability */
     font-size: 19px;
-    font-family: 'Roboto Condensed', sans-serif;
     padding: 10px 20px;
     text-decoration: none;
     background-image:
@@ -118,14 +117,18 @@ body {
     color: #555;
 }
 
-body.lang-ru .nav-links a {
+html[lang="ru"] .nav-links a {
     font-size: 14px;
 }
 
 .columns-container {
     display: flex;
 }
-
+html[lang="ar"] .columns-container,
+html[lang="ar"] .mobile-menu {
+    direction: rtl;
+    text-align: right;
+}
 .column {
     flex: 1;
     background-color: #f9f9f9;
@@ -275,7 +278,6 @@ body.lang-ru .nav-links a {
     border-top: 1px solid #ccc;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-
 .mobile-menu ul {
     list-style: none;
     padding: 0;
@@ -373,6 +375,7 @@ body.lang-ru .nav-links a {
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    opacity: 40%;
 }
 
 .menu-icon div {
@@ -634,7 +637,6 @@ body.lang-ru .nav-links a {
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
-    font-family: "Poppins", Sans-serif;
     font-size: 50px;
     line-height: 1.2em;
     font-weight: bold;
