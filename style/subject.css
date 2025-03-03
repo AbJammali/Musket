@@ -30,6 +30,9 @@ html[lang="ru"]  .subject-title,
 {
     width: 190px;
 }
+.subject-about-us .subject-title {
+    width: 80px;
+}
 .subject-title h1 {
     margin: 0;
     font-size: 24px;
