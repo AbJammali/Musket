@@ -23,7 +23,7 @@
         width: 130px;
     }
 }
-.muslim .subject-title {
+html[lang="ar"]  .subject-title {
     width: 190px;
 }
 .subject-title h1 {
@@ -55,11 +55,22 @@
     margin: 0 auto;
     text-align: left;
 }
-.arabic .subject-content p, 
-.arabic .subject-content h3,
-.arabic .subject-content .bullet-list {
+html[lang="ar"]  .subject-content p, 
+html[lang="ar"]  .subject-content h3,
+html[lang="ar"]  .subject-content .bullet-list {
+    text-align: right;
+    right: 10px;
+    left: 0px;
+}
+html[lang="ar"]  .subject-content .bullet {
+    padding-left: 10px;
+}
+
+html[lang="ar"]  .subject-content .bullet-list ul {
+    direction: rtl;
     text-align: right;
 }
+
 .subject-content h2 {
     text-align: center;
 }
@@ -79,9 +90,13 @@
     align-items: center;
     font-size: 16px;
 }
-.muslim .subject-content .bullet-list p {
+.bullet-list ul {
+    list-style: circle;
+}
+html[lang="ar"]  .subject-content .bullet-list p {
     font-size: 16px;
     display: flow;
+    margin-bottom: 7px;
 }
 .subject-content .bullet {
     padding-right: 10px; /* Space between bullet and text */
