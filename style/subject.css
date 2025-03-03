@@ -20,7 +20,7 @@
 }
 @media (max-width: 440px) {
     .subject-title {
-        width: 130px;
+        width: 190px;
     }
 }
 html[lang="ar"]  .subject-title {
