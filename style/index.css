@@ -630,7 +630,7 @@ html[lang="ar"] .mobile-menu {
         font-size: 24px;
     }
     .image-container{
-        height: 24vh;  
+        height: 50vh;  
     }
     #prayer-cards-container {
         flex-wrap: wrap;
@@ -641,7 +641,7 @@ html[lang="ar"] .mobile-menu {
         font-size: 31px;
     }
     .image-container{
-        height: 35vh;  
+        height: 50vh;  
     }
 }
 /* --------------------------------------------------- */
