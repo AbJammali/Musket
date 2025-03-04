@@ -130,62 +130,21 @@ function toggleMenu() {
 };
 //////////////////Animation for Donate mobile button//////////////////////
 
-const donateButton = document.getElementById('mobile-donate-btn');
-const letter = document.getElementById('mobile-donate-letter');
+document.addEventListener("DOMContentLoaded", function () {
+                const menu = document.getElementById("mobile-menu");
+                const openBtn = document.getElementById("hamburger-menu");
+                const donateBtn = document.getElementById("mobile-donate-btn");
 
-// Define initial and final positions for the button and letter
-const initialButtonPosition = 'translateX(-70px)';  // Initial position for the button
-const finalButtonPosition = 'translateX(15px)'; // Final position for the button (after click)
-const letterHidePosition = 'translateX(-70px)'; // Position for the letter (moves to the left and hides)
-const hrefValue = "https://www.example.com/donate";
+                openBtn.addEventListener("click", function () {
+                    menu.classList.toggle("active");
 
-// Function to move the button and hide the letter
-function moveToStartPosition() {
-    donateButton.style.transform = finalButtonPosition; // Move to final position (0px)
-    letter.style.transform = letterHidePosition; // Move the letter to the left and hide it
-    letter.style.opacity = 0; // Hide the letter
-
-    setTimeout(() => {
-        assignHref(); // Assign href after 0.5 seconds
-    }, 500);
-
-    setTimeout(() => {
-        moveToInitialPosition(); // Reset positions after 3 seconds
-    }, 3000);
-}
-
-// Function to reset to the initial position for both button and letter
-function moveToInitialPosition() {
-    donateButton.style.transform = initialButtonPosition;
-    letter.style.transform = 'translateX(0)'; // Reset letter position
-    letter.style.opacity = 1; // Make letter visible again
-    removeHref(); // Remove href after returning to initial position
-}
-
-// Function to assign the href
-function assignHref() {
-    donateButton.setAttribute('href', hrefValue);
-}
-
-// Function to remove the href
-function removeHref() {
-    donateButton.removeAttribute('href');
-}
-
-// Add event listener for the letter click event
-letter.addEventListener('click', () => {
-    moveToStartPosition(); // Trigger movement when the letter is clicked
-});
-
-// Add event listener for the button click event
-donateButton.addEventListener('click', (event) => {
-    // Check if the button has an href
-    if (!donateButton.hasAttribute('href')) {
-        event.preventDefault(); // Prevent navigation if href isn't set
-        moveToStartPosition(); // Trigger movement on click
-    }
-});
-
-// Set the initial position when the page loads
-donateButton.style.transform = initialButtonPosition;
+                    if (menu.classList.contains("active")) {
+                        donateBtn.style.display = "block";
+                        setTimeout(() => donateBtn.classList.add("active"), 10);
+                    } else {
+                        donateBtn.classList.remove("active");
+                        setTimeout(() => donateBtn.style.display = "none", 300);
+                    }
+                });
+            });
 
