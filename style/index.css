@@ -473,7 +473,7 @@ html[lang="ar"] .mobile-menu {
     border: none;
     cursor: pointer;
     transition: background-color 0.3sease;
-    background: radial-gradient(ellipse farthest-corner at right bottom, #B77A2F 0%, #B77A2F 4%, #DEB34F 30%, #DEB34F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #B77A2F 4%, #DEB34F 25%, #DEB34F 62.5%, #B77A2F 100%);
+   /* background: radial-gradient(ellipse farthest-corner at right bottom, #B77A2F 0%, #B77A2F 4%, #DEB34F 30%, #DEB34F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #B77A2F 4%, #DEB34F 25%, #DEB34F 62.5%, #B77A2F 100%); */
     background-size: 184%;
     -webkit-text-fill-color: #ecf0f1;
     animation: goldShimmer 3s infinite;
