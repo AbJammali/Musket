@@ -303,11 +303,8 @@ html[lang="ar"] .mobile-menu {
 }
 
 .mobile-menu .arrow {
+    font-size: 18px; /* Match the font size with menu items */
     color: #666;
-    font-size: 25px;
-    width: 30px;
-    padding-left: 20px;
-    padding-bottom: 5px;
 }
 
 /* Sub-options styling */
@@ -456,72 +453,36 @@ html[lang="ar"] .mobile-menu {
 }
 /* ------------------------------------------------- */
 /*Donation button on phone */
-.mobile-donate-sticky {
-    position: fixed;
-    top: 40%;
-    right: 0;
-    pointer-events: none;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    width: auto;
-    opacity: 1; /* Make the container visible */
-    transition: opacity 0.5s ease-in-out;
-    display: none; /* Hidden by default */
-    z-index: 2;
-}
-.mobile-donate-letter {
-    font-size: 36px;
-    cursor: pointer;
-    color: #0F8A8C;
-    margin-right: -39px; /* Adjust the margin to the left */
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    display: inline-block;
-    background: linear-gradient(90deg, #FFD700, #FFAA00, #FFD700);
-    background-size: 300%;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: goldShimmer 3s infinite;
-}
-
+/* Donate Button (Initially Hidden) */
 .mobile-donate-btn {
-    display: inline-block;
-    background-image:
-        radial-gradient(ellipse farthest-corner at right bottom, #0F8A8C 0%, #0F8A8C 8%, #0F8A8C 30%, #0F8A8C 40%, transparent 80%),
-        radial-gradient(ellipse farthest-corner at left top, #032E3B 8%, #032E3B 25%, #032E3B 62.5%, #0F8A8C 100%);
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    display: none; /* Initially hidden */
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    border-radius: 4px;
     color: #fff;
     font-size: 19px;
+    padding: 10px 20px;
     text-decoration: none;
+    background-image: radial-gradient(ellipse farthest-corner at right bottom, #0F8A8C 0%, #0F8A8C 8%, #0F8A8C 30%, #0F8A8C 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #032E3B 8%, #032E3B 25%, #032E3B 62.5%, #0F8A8C 100%);
     background-size: cover;
     background-repeat: no-repeat;
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.6s ease;
-    padding: 22px 20px;
-    border-radius: 4px;
-    text-align: center;
-    text-decoration: none;
-    font-weight: bold;
-    writing-mode: vertical-rl;
-    text-orientation: sideways;
-    rotate: 180deg;
-    transform: translateX(-70%); /* Start off-screen */
-    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
+    transition: background-color 0.3sease;
+    background: radial-gradient(ellipse farthest-corner at right bottom, #B77A2F 0%, #B77A2F 4%, #DEB34F 30%, #DEB34F 40%, transparent 80%), radial-gradient(ellipse farthest-corner at left top, #B77A2F 4%, #DEB34F 25%, #DEB34F 62.5%, #B77A2F 100%);
+    background-size: 184%;
+    -webkit-text-fill-color: #ecf0f1;
+    animation: goldShimmer 3s infinite;
 }
-.mobile-donate-letter,
-.mobile-donate-btn {
-    pointer-events: auto;
-}
-/* Keyframes for gold gradient animation */
-@keyframes goldShimmer {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-/* Keyframes for letter animation */
-@keyframes letterMove {
-    0% { transform: translateX(0); opacity: 1; }
-    100% { transform: translateX(-70px); opacity: 0; }
+
+/* Show Donate Button */
+.mobile-donate-btn.active {
+    display: block;
+    opacity: 1;
 }
 /* --------------------------------------------- */
 /* slider Animation */
@@ -669,7 +630,7 @@ html[lang="ar"] .mobile-menu {
         font-size: 24px;
     }
     .image-container{
-        height: 50vh;  
+        height: 24vh;  
     }
     #prayer-cards-container {
         flex-wrap: wrap;
@@ -680,7 +641,7 @@ html[lang="ar"] .mobile-menu {
         font-size: 31px;
     }
     .image-container{
-        height: 50vh;  
+        height: 35vh;  
     }
 }
 /* --------------------------------------------------- */
