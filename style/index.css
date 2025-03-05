@@ -396,7 +396,7 @@ html[lang="ar"] .mobile-menu {
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
-   /* background-color: gainsboro; */
+   background-color: transparent;
 }
 
 .menu-options.show {
