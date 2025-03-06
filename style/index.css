@@ -486,6 +486,16 @@ html[lang="ar"] .mobile-menu {
     display: block;
     opacity: 1;
 }
+/* Keyframes for gold gradient animation */
+@keyframes goldShimmer {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+@keyframes fadeInLeft {
+0% { opacity: 0; -webkit-transform: translateX(-20px); transform: translateX(-20px);}
+100% { opacity: 1; -webkit-transform: translateX(0); transform: translateX(0); }
+}
 /* --------------------------------------------- */
 /* slider Animation */
 .slider-section {
