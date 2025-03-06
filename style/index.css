@@ -294,7 +294,7 @@ html[lang="ar"] .mobile-menu {
     align-items: center; /* Vertical alignment */
     text-decoration: none;
     color: #333;
-    padding: 15px 20px; /* Add padding for spacing */
+    padding: 15px 10px; /* Add padding for spacing */
     font-size: 18px;
 }
 
@@ -303,10 +303,20 @@ html[lang="ar"] .mobile-menu {
 }
 
 .mobile-menu .arrow {
-    font-size: 18px; /* Match the font size with menu items */
-    color: #666;
+    background: none;
+    border: 1px solid black;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 25px;
+    color: #333;
+    transition: color 0.3s;
+    width: 30px;
+    padding-bottom: 5px;
+    padding-left: 20px;
 }
-
+html[lang="ar"] .mobile-menu .arrow {
+    padding-right: 20px;
+}
 /* Sub-options styling */
 .mobile-menu .mobile-sub-options {
     display: none;
