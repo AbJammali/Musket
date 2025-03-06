@@ -393,6 +393,7 @@ html[lang="ar"] .mobile-menu {
     display: none;
     /* backdrop-filter: blur(10px);  Adds blur effect */
     backdrop-filter: blur(8px); /* Adds blur effect */
+    -webkit-backdrop-filter: blur(8px);
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
     padding: 10px;
