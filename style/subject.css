@@ -19,7 +19,7 @@
     border-bottom: 3px solid #0F8A8C;
     /* Apply animation */
     opacity: 0; /* Start hidden */
-    animation: fadeInLeft 1s ease-out forwards;
+    animation: fadeInLeft 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 
 /* Keyframes for fade-in from the left */
