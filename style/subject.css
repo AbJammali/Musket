@@ -21,6 +21,11 @@
     opacity: 0; /* Start hidden */
     animation: fadeInLeft 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
+@supports (-webkit-backdrop-filter: blur(0)) {
+    .subject-title {
+        animation: fadeInLeft 0.8s ease-out forwards; /* Slightly slower for Safari */
+    }
+}
 
 /* Keyframes for fade-in from the left */
 @keyframes fadeInLeft {
