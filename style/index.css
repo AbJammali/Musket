@@ -304,7 +304,7 @@ html[lang="ar"] .mobile-menu {
 
 .mobile-menu .arrow {
     background: none;
-    border: 1px solid black;
+    border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 25px;
