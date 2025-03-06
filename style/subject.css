@@ -23,7 +23,7 @@
 }
 @supports (-webkit-backdrop-filter: blur(0)) {
     .subject-title {
-        animation: fadeInLeft 2s ease-out forwards; /* Slightly slower for Safari */
+        animation: fadeInLeft 1s ease-out forwards; /* Slightly slower for Safari */
     }
 }
 
