@@ -316,6 +316,7 @@ html[lang="ar"] .mobile-menu {
 }
 html[lang="ar"] .mobile-menu .arrow {
     padding-right: 20px;
+    width: 0px;
 }
 /* Sub-options styling */
 .mobile-menu .mobile-sub-options {
