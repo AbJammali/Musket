@@ -19,11 +19,11 @@
     border-bottom: 3px solid #0F8A8C;
     /* Apply animation */
     opacity: 0; /* Start hidden */
-    animation: fadeInLeft 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation: fadeInLeft 2s cubic-bezier(0.25, 1, 0.5, 1) forwards;
 }
 @supports (-webkit-backdrop-filter: blur(0)) {
     .subject-title {
-        animation: fadeInLeft 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards; /* Slightly slower for Safari */
+        animation: fadeInLeft 2s cubic-bezier(0.25, 1, 0.5, 1) forwards; /* Slightly slower for Safari */
     }
 }
 
