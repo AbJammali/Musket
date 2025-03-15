@@ -629,15 +629,7 @@ html[lang="ar"] .mobile-menu .arrow {
     font-weight: bold;
     text-align: center;
 }
-@media (min-width: 540px) {
-    .slider {
-        width: 30%; /* Display menu on smaller screens */
-    }
-}
 @media (max-width: 500px) {
-    .slider {
-        width: 50%; /* Display menu on smaller screens */
-    }
     .mobile-donate-sticky {
         display: flex; /* Make the container visible on small screens */
     }
