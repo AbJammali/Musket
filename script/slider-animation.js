@@ -35,12 +35,3 @@
         setInterval(() => {
             moveSlide(1); // Move to the next slide every 3 seconds
         }, slideInterval);
-//////////////////// Reset donation mobile button to initial position after 3 sec/////////////
-    const donateButton = document.getElementById('mobile-donate-btn');
-    const letter = document.getElementById('mobile-donate-letter');
-
-    // Define initial and final positions for the button and letter
-    const initialButtonPosition = 'translateX(-70px)';  // Initial position for the button
-    const finalButtonPosition = 'translateX(15px)'; // Final position for the button (after click)
-    const letterHidePosition = 'translateX(-70px)'; // Position for the letter (moves to the left and hides)
-    const hrefValue = "https://www.example.com/donate";
